@@ -6,7 +6,6 @@ import android.widget.RelativeLayout;
 
 import beijingnews.njj.com.beijingnews.R;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class SplashActivity extends BaseActivity {
 
