@@ -20,7 +20,7 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        ButterKnife.bind(this);
+//        ButterKnife.bind(this);
 
         mImageView.setImageResource(R.drawable.splash_bg_newyear);
 
