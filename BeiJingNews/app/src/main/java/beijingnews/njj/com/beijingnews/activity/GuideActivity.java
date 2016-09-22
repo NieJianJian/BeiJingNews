@@ -1,5 +1,6 @@
 package beijingnews.njj.com.beijingnews.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 
 import beijingnews.njj.com.beijingnews.R;
+import beijingnews.njj.com.beijingnews.utils.CacheUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -59,6 +61,16 @@ public class GuideActivity extends BaseActivity {
         mViewPager.setAdapter(new GuidePagerAdapter());
         mRedPoint.getViewTreeObserver().addOnGlobalLayoutListener(new MyOnGlobalLayoutListener());
         mViewPager.addOnPageChangeListener(new MyOnPageChangeListener());
+        mStartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 保存软件参数，标识进入过引导界面，之后跳过直接到主页面
+                CacheUtils.putBoolean(GuideActivity.this, SplashActivity.START_MAIN, true);
+                Intent intent = new Intent(GuideActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
@@ -78,7 +90,11 @@ public class GuideActivity extends BaseActivity {
 
         @Override
         public void onPageSelected(int position) {
-
+            if (position == images.size() - 1) {
+                mStartBtn.setVisibility(View.VISIBLE);
+            } else {
+                mStartBtn.setVisibility(View.GONE);
+            }
         }
 
         @Override
@@ -107,11 +123,6 @@ public class GuideActivity extends BaseActivity {
         public Object instantiateItem(ViewGroup container, int position) {
             ImageView imageView = images.get(position);
             container.addView(imageView);
-//            if (position == 2) {
-//                mStartBtn.setVisibility(View.VISIBLE);
-//            } else {
-//                mStartBtn.setVisibility(View.GONE);
-//            }
             return imageView;
 //            return position;
         }

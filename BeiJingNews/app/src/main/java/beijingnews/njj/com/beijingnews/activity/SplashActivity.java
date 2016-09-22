@@ -10,11 +10,13 @@ import android.view.animation.ScaleAnimation;
 import android.widget.RelativeLayout;
 
 import beijingnews.njj.com.beijingnews.R;
+import beijingnews.njj.com.beijingnews.utils.CacheUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class SplashActivity extends BaseActivity {
 
+    public static final String START_MAIN = "start_main";
     @Bind(R.id.rl_splash_view)
     RelativeLayout rl;
 
@@ -62,7 +64,12 @@ public class SplashActivity extends BaseActivity {
 
         @Override
         public void onAnimationEnd(Animation animation) {
-            Intent intent = new Intent(SplashActivity.this, GuideActivity.class);
+            Intent intent;
+            if (CacheUtils.getBoolean(SplashActivity.this, START_MAIN)) {
+                intent = new Intent(SplashActivity.this, MainActivity.class);
+            } else {
+                intent = new Intent(SplashActivity.this, GuideActivity.class);
+            }
             startActivity(intent);
             finish();
         }
