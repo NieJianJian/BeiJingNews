@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import beijingnews.njj.com.beijingnews.R;
 import beijingnews.njj.com.beijingnews.utils.CacheUtils;
+import beijingnews.njj.com.beijingnews.utils.DensityUtil;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -33,6 +34,7 @@ public class GuideActivity extends BaseActivity {
 
     private ArrayList<ImageView> images;
     private int pointMargin;
+    private int widthDpi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class GuideActivity extends BaseActivity {
         ButterKnife.bind(this);
 
         images = new ArrayList<ImageView>();
+        widthDpi = DensityUtil.dip2px(this, 10);
         int[] ids = {R.drawable.guide_1, R.drawable.guide_2, R.drawable.guide_3};
         for (int i = 0; i < ids.length; i++) {
             ImageView imageView = new ImageView(this);
@@ -50,9 +53,9 @@ public class GuideActivity extends BaseActivity {
 
             ImageView normal_point = new ImageView(this);
             normal_point.setBackgroundResource(R.drawable.normal_point);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(20, 20);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(widthDpi, widthDpi);
             if (i != 0) {
-                params.leftMargin = 20;
+                params.leftMargin = widthDpi;
             }
             normal_point.setLayoutParams(params);
 
@@ -83,7 +86,7 @@ public class GuideActivity extends BaseActivity {
 //            float maxLeft = positionOffsetPixels * pointMargin;
             float marginLefts = (position + positionOffset) * pointMargin;
 
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(20, 20);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(widthDpi, widthDpi);
             params.leftMargin = (int) marginLefts;
             mRedPoint.setLayoutParams(params);
         }
