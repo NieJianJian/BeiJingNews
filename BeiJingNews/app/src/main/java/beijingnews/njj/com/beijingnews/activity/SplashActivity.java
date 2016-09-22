@@ -1,5 +1,6 @@
 package beijingnews.njj.com.beijingnews.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -7,7 +8,6 @@ import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import beijingnews.njj.com.beijingnews.R;
 import butterknife.Bind;
@@ -62,7 +62,9 @@ public class SplashActivity extends BaseActivity {
 
         @Override
         public void onAnimationEnd(Animation animation) {
-            Toast.makeText(getApplication(),"动画播放完成",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SplashActivity.this, GuideActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         @Override
