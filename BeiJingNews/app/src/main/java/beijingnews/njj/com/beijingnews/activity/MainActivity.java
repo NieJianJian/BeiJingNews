@@ -1,11 +1,15 @@
 package beijingnews.njj.com.beijingnews.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import beijingnews.njj.com.beijingnews.R;
+import beijingnews.njj.com.beijingnews.fragment.LeftMenuFragment;
+import beijingnews.njj.com.beijingnews.fragment.MainFragment;
 import beijingnews.njj.com.beijingnews.utils.DensityUtil;
 
 
@@ -24,6 +28,9 @@ import beijingnews.njj.com.beijingnews.utils.DensityUtil;
  */
 public class MainActivity extends SlidingFragmentActivity {
 
+    public static final String LEFTMENU_TAG = "leftmenu_tag";
+    public static final String Main_TAG = "main_tag";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +48,19 @@ public class MainActivity extends SlidingFragmentActivity {
         slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
         // 设置页面占比宽度
         slidingMenu.setBehindOffset(DensityUtil.dip2px(this, 200));
+
+        initFragment();
+
+    }
+
+    private void initFragment() {
+        FragmentManager fm = getSupportFragmentManager();
+        // 开启事务
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fl_leftmenu, new LeftMenuFragment(), LEFTMENU_TAG);
+        ft.replace(R.id.fl_main, new MainFragment(), Main_TAG);
+        // 事务的提交
+        ft.commit();
 
     }
 }
