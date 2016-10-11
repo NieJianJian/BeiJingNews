@@ -6,12 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.ArrayList;
 
 import beijingnews.njj.com.beijingnews.R;
+import beijingnews.njj.com.beijingnews.activity.MainActivity;
 import beijingnews.njj.com.beijingnews.base.BaseFragment;
 import beijingnews.njj.com.beijingnews.base.BasePager;
 import beijingnews.njj.com.beijingnews.pager.GovaffairPager;
@@ -70,6 +73,7 @@ public class MainFragment extends BaseFragment {
         // 监听页面的改变
         mViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
         mBasePagers.get(0).initData(); // 一进来加载第一个页面的内容
+        isEnableSlidingMenu(false); // 默认不可拖拽
 
     }
 
@@ -98,21 +102,40 @@ public class MainFragment extends BaseFragment {
             switch (checkedId) {
                 case R.id.rb_home:
                     mViewPager.setCurrentItem(0, false);
+                    isEnableSlidingMenu(false);
                     break;
                 case R.id.rb_newscenter:
                     mViewPager.setCurrentItem(1, false);
+                    isEnableSlidingMenu(true);
                     break;
                 case R.id.rb_smartservice:
                     mViewPager.setCurrentItem(2, false);
+                    isEnableSlidingMenu(false);
                     break;
                 case R.id.rb_govaffair:
                     mViewPager.setCurrentItem(3, false);
+                    isEnableSlidingMenu(false);
                     break;
                 case R.id.rb_settings:
                     mViewPager.setCurrentItem(4, false);
+                    isEnableSlidingMenu(false);
                     break;
             }
         }
+    }
+
+    /**
+     * 决定SlidingMenu是否可以拖拽
+     * 先获取MainActivity，然后获取SlidingMenu对象，进行设置
+     *
+     * @param isEnableSlidingMenu
+     */
+    private void isEnableSlidingMenu(boolean isEnableSlidingMenu) {
+        MainActivity activity = (MainActivity) mActivity;
+        ((MainActivity) mActivity).getSlidingMenu().
+                setTouchModeAbove(isEnableSlidingMenu ?
+                        SlidingMenu.TOUCHMODE_FULLSCREEN : SlidingMenu.TOUCHMODE_NONE);
+
     }
 
     class ContentFragmentAdapter extends PagerAdapter {
