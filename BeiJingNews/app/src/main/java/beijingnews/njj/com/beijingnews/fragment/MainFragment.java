@@ -1,7 +1,6 @@
 package beijingnews.njj.com.beijingnews.fragment;
 
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
@@ -19,6 +18,7 @@ import beijingnews.njj.com.beijingnews.pager.HomePager;
 import beijingnews.njj.com.beijingnews.pager.NewsCenterPager;
 import beijingnews.njj.com.beijingnews.pager.SettingPager;
 import beijingnews.njj.com.beijingnews.pager.SmartServicePager;
+import beijingnews.njj.com.beijingnews.view.NoScrollViewPager;
 
 /**
  * Created by Administrator on 2016/9/23.
@@ -33,7 +33,7 @@ public class MainFragment extends BaseFragment {
      * 4.设置适配器
      */
     @ViewInject(R.id.main_fragment_viewpager)
-    private ViewPager mViewPager;
+    private NoScrollViewPager mViewPager;
     @ViewInject(R.id.rg_bottom_tag)
     private RadioGroup mRadioGroup;
 
