@@ -1,6 +1,7 @@
 package beijingnews.njj.com.beijingnews.fragment;
 
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
@@ -65,6 +66,29 @@ public class MainFragment extends BaseFragment {
 
         // 监听RadioGroup的状态
         mRadioGroup.setOnCheckedChangeListener(new MyOnCheckedChangeListener());
+
+        // 监听页面的改变
+        mViewPager.setOnPageChangeListener(new MyOnPageChangeListener());
+        mBasePagers.get(0).initData(); // 一进来加载第一个页面的内容
+
+    }
+
+    class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            mBasePagers.get(position).initData(); // 执行某一个页面的initDate方法
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
     }
 
     class MyOnCheckedChangeListener implements RadioGroup.OnCheckedChangeListener {
@@ -113,7 +137,7 @@ public class MainFragment extends BaseFragment {
             View rootView = basePager.mRootView;
             container.addView(rootView);
             // 本应该调用,如果不调用，就没有数据
-            basePager.initData();
+//            basePager.initData(); // 取消，防止预加载
             return rootView;
         }
 
