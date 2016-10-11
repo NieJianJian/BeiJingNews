@@ -62,6 +62,33 @@ public class MainFragment extends BaseFragment {
 
         // 设置适配器
         mViewPager.setAdapter(new ContentFragmentAdapter());
+
+        // 监听RadioGroup的状态
+        mRadioGroup.setOnCheckedChangeListener(new MyOnCheckedChangeListener());
+    }
+
+    class MyOnCheckedChangeListener implements RadioGroup.OnCheckedChangeListener {
+
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            switch (checkedId) {
+                case R.id.rb_home:
+                    mViewPager.setCurrentItem(0, false);
+                    break;
+                case R.id.rb_newscenter:
+                    mViewPager.setCurrentItem(1, false);
+                    break;
+                case R.id.rb_smartservice:
+                    mViewPager.setCurrentItem(2, false);
+                    break;
+                case R.id.rb_govaffair:
+                    mViewPager.setCurrentItem(3, false);
+                    break;
+                case R.id.rb_settings:
+                    mViewPager.setCurrentItem(4, false);
+                    break;
+            }
+        }
     }
 
     class ContentFragmentAdapter extends PagerAdapter {
