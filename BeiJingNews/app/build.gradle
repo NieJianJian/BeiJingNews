@@ -26,4 +26,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile project(':SlidingMenu_library')
     compile project(':xutils_library')
+    compile files('libs/gson-2.2.1.jar')
 }
