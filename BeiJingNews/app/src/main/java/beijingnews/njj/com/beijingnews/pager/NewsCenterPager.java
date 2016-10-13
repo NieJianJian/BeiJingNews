@@ -2,9 +2,14 @@ package beijingnews.njj.com.beijingnews.pager;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import beijingnews.njj.com.beijingnews.base.BasePager;
 
@@ -21,6 +26,7 @@ public class NewsCenterPager extends BasePager {
     @Override
     public void initData() {
         super.initData();
+
         // 设置标题
         tv_title.setText("新闻中心");
         ib_menu.setVisibility(View.VISIBLE);
@@ -33,5 +39,38 @@ public class NewsCenterPager extends BasePager {
         textView.setGravity(Gravity.CENTER);
         fl_child_content.addView(textView);
 
+        getDataFromNet();
+
     }
+
+    private void getDataFromNet() {
+        Log.i("niejianjian", " -> onSuccess -> result = ");
+        // 在子线程
+        RequestParams params = new RequestParams("http://api.aucauc.cn/api/indexpic/?t=android&token=&versionName=test_1.0.3&checksum=562e378e5f59&clientType=1&version=4");
+//        RequestParams params = new RequestParams(ConstantUtils.newscenter_url);
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                Log.i("niejianjian", " -> onSuccess -> result = " + result);
+            }
+
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                Log.i("niejianjian", " -> onError -> ex = " + ex.toString());
+            }
+
+            @Override
+            public void onCancelled(CancelledException cex) {
+                Log.i("niejianjian", " -> onCancelled -> cex = " + cex.toString());
+            }
+
+            @Override
+            public void onFinished() {
+                Log.i("niejianjian", " -> onFinished -> ");
+            }
+        });
+
+    }
+
+
 }
