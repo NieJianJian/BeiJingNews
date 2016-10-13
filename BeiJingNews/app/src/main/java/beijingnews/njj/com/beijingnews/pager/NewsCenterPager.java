@@ -7,11 +7,14 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
 import beijingnews.njj.com.beijingnews.base.BasePager;
+import beijingnews.njj.com.beijingnews.domain.NewsCenterPagerBean;
 
 /**
  * Created by Administrator on 2016/10/10.
@@ -52,6 +55,7 @@ public class NewsCenterPager extends BasePager {
             @Override
             public void onSuccess(String result) {
                 Log.i("niejianjian", " -> onSuccess -> result = " + result);
+                processData(result);
             }
 
             @Override
@@ -70,6 +74,12 @@ public class NewsCenterPager extends BasePager {
             }
         });
 
+    }
+
+    private void processData(String json) {
+        Gson gson = new Gson();
+        NewsCenterPagerBean bean = gson.fromJson(json, NewsCenterPagerBean.class);
+        String title = bean.getData().get(0).getChildren().get(2).getTitle();
     }
 
 
