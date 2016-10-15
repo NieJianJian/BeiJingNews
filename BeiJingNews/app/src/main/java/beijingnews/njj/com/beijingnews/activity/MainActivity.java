@@ -61,6 +61,16 @@ public class MainActivity extends SlidingFragmentActivity {
         ft.replace(R.id.fl_main, new MainFragment(), Main_TAG);
         // 事务的提交
         ft.commit();
-
     }
+
+    /**
+     * 得到左侧Framgnet实例
+     */
+    public LeftMenuFragment getLeftMenuFragment() {
+        FragmentManager fm = getSupportFragmentManager();
+        LeftMenuFragment leftMenuFragment =
+                (LeftMenuFragment) fm.findFragmentByTag(LEFTMENU_TAG);
+        return leftMenuFragment;
+    }
+
 }

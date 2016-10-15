@@ -13,14 +13,22 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.util.List;
+
+import beijingnews.njj.com.beijingnews.activity.MainActivity;
 import beijingnews.njj.com.beijingnews.base.BasePager;
 import beijingnews.njj.com.beijingnews.domain.NewsCenterPagerBean;
+import beijingnews.njj.com.beijingnews.fragment.LeftMenuFragment;
+import beijingnews.njj.com.beijingnews.utils.ConstantUtils;
 
 /**
  * Created by Administrator on 2016/10/10.
  * 新闻中心
  */
 public class NewsCenterPager extends BasePager {
+
+    // 左侧菜单对应的数据
+    private List<NewsCenterPagerBean.DataBean> leftMenuData;
 
     public NewsCenterPager(Activity activity) {
         super(activity);
@@ -47,10 +55,10 @@ public class NewsCenterPager extends BasePager {
     }
 
     private void getDataFromNet() {
-        Log.i("niejianjian", " -> onSuccess -> result = ");
+        Log.i("niejianjian", " -> getDataFromNet -> result = ");
         // 在子线程
-        RequestParams params = new RequestParams("http://api.aucauc.cn/api/indexpic/?t=android&token=&versionName=test_1.0.3&checksum=562e378e5f59&clientType=1&version=4");
-//        RequestParams params = new RequestParams(ConstantUtils.newscenter_url);
+        RequestParams params = new RequestParams(ConstantUtils.newscenter_url);
+        // 使用xUitls之前，在application中进行初始化
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -77,9 +85,17 @@ public class NewsCenterPager extends BasePager {
     }
 
     private void processData(String json) {
+        // 解析数据- gson解析 和 手动
         Gson gson = new Gson();
         NewsCenterPagerBean bean = gson.fromJson(json, NewsCenterPagerBean.class);
-        String title = bean.getData().get(0).getChildren().get(2).getTitle();
+//        String title = bean.getData().get(0).getChildren().get(2).getTitle();
+        leftMenuData = bean.getData();
+        // MainActivity实例传递给MainFragment，再给了NewsCenterPager。
+        // 所以，当前的mActivity对象，就是MainActivity实例，直接强转就可以
+        MainActivity activity = (MainActivity) mActivity;
+        LeftMenuFragment leftMenuFragment = activity.getLeftMenuFragment();
+        leftMenuFragment.setLeftMenuData(leftMenuData);
+
     }
 
 
