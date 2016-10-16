@@ -36,6 +36,7 @@ public class BasePager {
             @Override
             public void onClick(View v) {
                 MainActivity activity = (MainActivity) mActivity;
+                // 切换页面
                 activity.getSlidingMenu().toggle();
             }
         });

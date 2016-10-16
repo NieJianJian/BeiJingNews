@@ -52,6 +52,7 @@ public class LeftMenuFragment extends BaseFragment {
 
                 // 3.把菜单收起
                 MainActivity activity = (MainActivity) mActivity;
+                // 切换页面
                 activity.getSlidingMenu().toggle();
                 // 4. 切换到具体的页面：新闻、专题、组图、互动
             }
