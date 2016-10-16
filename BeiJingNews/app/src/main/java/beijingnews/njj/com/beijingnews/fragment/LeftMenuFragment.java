@@ -41,25 +41,27 @@ public class LeftMenuFragment extends BaseFragment {
         mListView.setSelector(android.R.color.transparent);
 
         // 设置点击事件
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // 1.记录当前点击的某条的位置
-                mPrePositon = position;
-                // 适配器刷新 getCount -> getView();
-                mLeftMenuAdapter.notifyDataSetChanged();
-                // 2.在适配器中的getView方法中设置我们TextView是否为enable
-
-                // 3.把菜单收起
-                MainActivity activity = (MainActivity) mActivity;
-                // 切换页面
-                activity.getSlidingMenu().toggle();
-                // 4. 切换到具体的页面：新闻、专题、组图、互动
-            }
-        });
-
+        mListView.setOnItemClickListener(new LeftMenuItemClickListener());
 
         return mListView;
+    }
+
+    class LeftMenuItemClickListener implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // 1.记录当前点击的某条的位置
+            mPrePositon = position;
+            // 适配器刷新 getCount -> getView();
+            mLeftMenuAdapter.notifyDataSetChanged();
+            // 2.在适配器中的getView方法中设置我们TextView是否为enable
+
+            // 3.把菜单收起
+            MainActivity activity = (MainActivity) mActivity;
+            // 切换页面
+            activity.getSlidingMenu().toggle();
+            // 4. 切换到具体的页面：新闻、专题、组图、互动
+        }
     }
 
     /**
