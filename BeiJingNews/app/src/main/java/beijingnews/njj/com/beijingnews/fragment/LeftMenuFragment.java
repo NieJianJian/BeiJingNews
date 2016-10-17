@@ -89,7 +89,7 @@ public class LeftMenuFragment extends BaseFragment {
         mListView.setAdapter(mLeftMenuAdapter);
 
         // 设置默认详情页面0
-        switchMenuDetailPager(0);
+        switchMenuDetailPager(mPrePositon);
 
     }
 

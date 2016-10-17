@@ -47,7 +47,7 @@ public class NewsCenterPager extends BasePager {
         super.initData();
 
         // 设置标题
-        tv_title.setText("新闻中心");
+//        tv_title.setText("新闻中心");
         ib_menu.setVisibility(View.VISIBLE);
 
         // 设置内容
@@ -56,8 +56,8 @@ public class NewsCenterPager extends BasePager {
         textView.setTextSize(30);
         textView.setTextColor(Color.RED);
         textView.setGravity(Gravity.CENTER);
-        fl_child_content.removeAllViews();
-        fl_child_content.addView(textView);
+//        fl_child_content.removeAllViews();
+//        fl_child_content.addView(textView);
 
         getDataFromNet();
 
