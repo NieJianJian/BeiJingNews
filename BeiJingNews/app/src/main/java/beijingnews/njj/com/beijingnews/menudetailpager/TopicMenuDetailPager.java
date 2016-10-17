@@ -25,7 +25,7 @@ public class TopicMenuDetailPager extends MenuDetailBasePager {
         textView.setTextSize(30);
         textView.setGravity(Gravity.CENTER);
         textView.setTextColor(Color.RED);
-        return null;
+        return textView;
     }
 
     @Override
