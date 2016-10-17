@@ -2,6 +2,7 @@ package beijingnews.njj.com.beijingnews.pager;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -25,6 +26,7 @@ import beijingnews.njj.com.beijingnews.menudetailpager.InteracMenuDetailPager;
 import beijingnews.njj.com.beijingnews.menudetailpager.NewsMenuDetailPager;
 import beijingnews.njj.com.beijingnews.menudetailpager.PhotosMenuDetailPager;
 import beijingnews.njj.com.beijingnews.menudetailpager.TopicMenuDetailPager;
+import beijingnews.njj.com.beijingnews.utils.CacheUtils;
 import beijingnews.njj.com.beijingnews.utils.ConstantUtils;
 
 /**
@@ -59,6 +61,12 @@ public class NewsCenterPager extends BasePager {
 //        fl_child_content.removeAllViews();
 //        fl_child_content.addView(textView);
 
+        // 获取数据
+        String json = CacheUtils.getString(mActivity, ConstantUtils.newscenter_url);
+        if (!TextUtils.isEmpty(json)) {
+            processData(json);
+        }
+
         getDataFromNet();
 
     }
@@ -73,6 +81,8 @@ public class NewsCenterPager extends BasePager {
             public void onSuccess(String result) {
                 Log.i("niejianjian", " -> onSuccess -> result = " + result);
                 processData(result);
+                // 缓存数据
+                CacheUtils.putString(mActivity, ConstantUtils.newscenter_url, result);
             }
 
             @Override
