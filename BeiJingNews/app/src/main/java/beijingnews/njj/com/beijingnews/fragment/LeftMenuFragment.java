@@ -62,11 +62,16 @@ public class LeftMenuFragment extends BaseFragment {
             // 切换页面
             activity.getSlidingMenu().toggle();
             // 4. 切换到具体的页面：新闻、专题、组图、互动
-            MainFragment mainFragment = activity.getMainFragment();
-            NewsCenterPager newsCenterPager = mainFragment.getNewsCenterPager();
-            newsCenterPager.switchMenuDetailPager(position);
+            switchMenuDetailPager(position);
 
         }
+    }
+
+    private void switchMenuDetailPager(int position) {
+        MainActivity activity = (MainActivity) mActivity;
+        MainFragment mainFragment = activity.getMainFragment();
+        NewsCenterPager newsCenterPager = mainFragment.getNewsCenterPager();
+        newsCenterPager.switchMenuDetailPager(position);
     }
 
     /**
@@ -82,6 +87,9 @@ public class LeftMenuFragment extends BaseFragment {
 
         mLeftMenuAdapter = new LeftMenuAdapter();
         mListView.setAdapter(mLeftMenuAdapter);
+
+        // 设置默认详情页面0
+        switchMenuDetailPager(0);
 
     }
 

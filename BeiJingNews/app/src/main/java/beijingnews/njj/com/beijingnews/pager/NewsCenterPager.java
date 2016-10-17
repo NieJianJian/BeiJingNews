@@ -99,19 +99,18 @@ public class NewsCenterPager extends BasePager {
         NewsCenterPagerBean bean = gson.fromJson(json, NewsCenterPagerBean.class);
 //        String title = bean.getData().get(0).getChildren().get(2).getTitle();
         leftMenuData = bean.getData();
-        // MainActivity实例传递给MainFragment，再给了NewsCenterPager。
-        // 所以，当前的mActivity对象，就是MainActivity实例，直接强转就可以
-        MainActivity activity = (MainActivity) mActivity;
-        LeftMenuFragment leftMenuFragment = activity.getLeftMenuFragment();
-        leftMenuFragment.setLeftMenuData(leftMenuData);
-
         // 添加新闻详情页面，专题详情页面，组图详情页面，互动详情页面
+        // 先加载数据，添加集合，防止初始化时，数据还未加载完成导致空指针
         mMenuDetailBasePagers = new ArrayList<MenuDetailBasePager>();
         mMenuDetailBasePagers.add(new NewsMenuDetailPager(mActivity));
         mMenuDetailBasePagers.add(new TopicMenuDetailPager(mActivity));
         mMenuDetailBasePagers.add(new PhotosMenuDetailPager(mActivity));
         mMenuDetailBasePagers.add(new InteracMenuDetailPager(mActivity));
-
+        // MainActivity实例传递给MainFragment，再给了NewsCenterPager。
+        // 所以，当前的mActivity对象，就是MainActivity实例，直接强转就可以
+        MainActivity activity = (MainActivity) mActivity;
+        LeftMenuFragment leftMenuFragment = activity.getLeftMenuFragment();
+        leftMenuFragment.setLeftMenuData(leftMenuData);
 
     }
 
