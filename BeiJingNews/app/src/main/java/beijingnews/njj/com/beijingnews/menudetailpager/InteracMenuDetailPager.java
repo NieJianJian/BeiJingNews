@@ -14,14 +14,15 @@ import beijingnews.njj.com.beijingnews.base.MenuDetailBasePager;
  */
 public class InteracMenuDetailPager extends MenuDetailBasePager {
 
+    TextView textView;
+
     public InteracMenuDetailPager(Activity activity) {
         super(activity);
     }
 
     @Override
     public View initView() {
-        TextView textView = new TextView(mActivity);
-        textView.setText("菜单——互动详情页面");
+        textView = new TextView(mActivity);
         textView.setTextSize(30);
         textView.setGravity(Gravity.CENTER);
         textView.setTextColor(Color.RED);
@@ -31,6 +32,7 @@ public class InteracMenuDetailPager extends MenuDetailBasePager {
     @Override
     public void initData() {
         super.initData();
+        textView.setText("菜单——互动详情页面");
         Log.i("niejianjian", " -> 菜单——互动-详情页面数据被初始化了 ->");
     }
 }

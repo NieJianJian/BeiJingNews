@@ -13,12 +13,18 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import beijingnews.njj.com.beijingnews.activity.MainActivity;
 import beijingnews.njj.com.beijingnews.base.BasePager;
+import beijingnews.njj.com.beijingnews.base.MenuDetailBasePager;
 import beijingnews.njj.com.beijingnews.domain.NewsCenterPagerBean;
 import beijingnews.njj.com.beijingnews.fragment.LeftMenuFragment;
+import beijingnews.njj.com.beijingnews.menudetailpager.InteracMenuDetailPager;
+import beijingnews.njj.com.beijingnews.menudetailpager.NewsMenuDetailPager;
+import beijingnews.njj.com.beijingnews.menudetailpager.PhotosMenuDetailPager;
+import beijingnews.njj.com.beijingnews.menudetailpager.TopicMenuDetailPager;
 import beijingnews.njj.com.beijingnews.utils.ConstantUtils;
 
 /**
@@ -29,6 +35,8 @@ public class NewsCenterPager extends BasePager {
 
     // 左侧菜单对应的数据
     private List<NewsCenterPagerBean.DataBean> leftMenuData;
+    // 左侧菜单对应的详情页面的集合
+    private List<MenuDetailBasePager> mMenuDetailBasePagers;
 
     public NewsCenterPager(Activity activity) {
         super(activity);
@@ -48,6 +56,7 @@ public class NewsCenterPager extends BasePager {
         textView.setTextSize(30);
         textView.setTextColor(Color.RED);
         textView.setGravity(Gravity.CENTER);
+        fl_child_content.removeAllViews();
         fl_child_content.addView(textView);
 
         getDataFromNet();
@@ -96,7 +105,28 @@ public class NewsCenterPager extends BasePager {
         LeftMenuFragment leftMenuFragment = activity.getLeftMenuFragment();
         leftMenuFragment.setLeftMenuData(leftMenuData);
 
+        // 添加新闻详情页面，专题详情页面，组图详情页面，互动详情页面
+        mMenuDetailBasePagers = new ArrayList<MenuDetailBasePager>();
+        mMenuDetailBasePagers.add(new NewsMenuDetailPager(mActivity));
+        mMenuDetailBasePagers.add(new TopicMenuDetailPager(mActivity));
+        mMenuDetailBasePagers.add(new PhotosMenuDetailPager(mActivity));
+        mMenuDetailBasePagers.add(new InteracMenuDetailPager(mActivity));
+
+
     }
 
+    /**
+     *
+     */
+    public void switchMenuDetailPager(int position) {
+        // 设置标题
+        tv_title.setText(leftMenuData.get(position).getTitle());
 
+        MenuDetailBasePager detailBasePager = mMenuDetailBasePagers.get(position);
+        View rootView = detailBasePager.mRootView;
+        fl_child_content.removeAllViews();
+        fl_child_content.addView(rootView);
+        // 还没有掉detailBasePager.initData()方法
+        detailBasePager.initData();
+    }
 }

@@ -18,10 +18,11 @@ public class TopicMenuDetailPager extends MenuDetailBasePager {
         super(activity);
     }
 
+    TextView textView;
+
     @Override
     public View initView() {
-        TextView textView = new TextView(mActivity);
-        textView.setText("菜单——专题详情页面");
+        textView = new TextView(mActivity);
         textView.setTextSize(30);
         textView.setGravity(Gravity.CENTER);
         textView.setTextColor(Color.RED);
@@ -31,6 +32,7 @@ public class TopicMenuDetailPager extends MenuDetailBasePager {
     @Override
     public void initData() {
         super.initData();
+        textView.setText("菜单——专题详情页面");
         Log.i("niejianjian", " -> 菜单——专题-详情页面数据被初始化了 ->");
     }
 }

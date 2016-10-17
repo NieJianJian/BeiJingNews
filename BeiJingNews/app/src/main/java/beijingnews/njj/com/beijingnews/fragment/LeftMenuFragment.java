@@ -15,6 +15,7 @@ import beijingnews.njj.com.beijingnews.R;
 import beijingnews.njj.com.beijingnews.activity.MainActivity;
 import beijingnews.njj.com.beijingnews.base.BaseFragment;
 import beijingnews.njj.com.beijingnews.domain.NewsCenterPagerBean;
+import beijingnews.njj.com.beijingnews.pager.NewsCenterPager;
 
 /**
  * Created by Administrator on 2016/9/23.
@@ -61,6 +62,10 @@ public class LeftMenuFragment extends BaseFragment {
             // 切换页面
             activity.getSlidingMenu().toggle();
             // 4. 切换到具体的页面：新闻、专题、组图、互动
+            MainFragment mainFragment = activity.getMainFragment();
+            NewsCenterPager newsCenterPager = mainFragment.getNewsCenterPager();
+            newsCenterPager.switchMenuDetailPager(position);
+
         }
     }
 

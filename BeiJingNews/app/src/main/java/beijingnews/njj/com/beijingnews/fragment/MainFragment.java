@@ -77,6 +77,13 @@ public class MainFragment extends BaseFragment {
 
     }
 
+    /**
+     * 得到新闻中心实例
+     */
+    public NewsCenterPager getNewsCenterPager() {
+        return (NewsCenterPager) mBasePagers.get(1);
+    }
+
     class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
         @Override

@@ -30,6 +30,7 @@ public class MainActivity extends SlidingFragmentActivity {
 
     public static final String LEFTMENU_TAG = "leftmenu_tag";
     public static final String Main_TAG = "main_tag";
+    private FragmentManager fm;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,12 +50,12 @@ public class MainActivity extends SlidingFragmentActivity {
         // 设置页面占比宽度
         slidingMenu.setBehindOffset(DensityUtil.dip2px(this, 200));
 
+        fm = getSupportFragmentManager();
         initFragment();
 
     }
 
     private void initFragment() {
-        FragmentManager fm = getSupportFragmentManager();
         // 开启事务
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fl_leftmenu, new LeftMenuFragment(), LEFTMENU_TAG);
@@ -67,10 +68,17 @@ public class MainActivity extends SlidingFragmentActivity {
      * 得到左侧Framgnet实例
      */
     public LeftMenuFragment getLeftMenuFragment() {
-        FragmentManager fm = getSupportFragmentManager();
         LeftMenuFragment leftMenuFragment =
                 (LeftMenuFragment) fm.findFragmentByTag(LEFTMENU_TAG);
         return leftMenuFragment;
+    }
+
+    /**
+     * 得到右侧fragment实例
+     */
+    public MainFragment getMainFragment() {
+        MainFragment mainFragment = (MainFragment) fm.findFragmentByTag(Main_TAG);
+        return mainFragment;
     }
 
 }
