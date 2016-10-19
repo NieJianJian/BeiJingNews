@@ -115,12 +115,11 @@ public class NewsCenterPager extends BasePager {
         NewsCenterPagerBean2 bean2 = parseJson2(json);
 
         leftMenuData = bean.getData();
-        Log.i("niejianjian"," ->  ->" + bean2.getData().get(0).getChildren().get(2).getTitle());
 
         // 添加新闻详情页面，专题详情页面，组图详情页面，互动详情页面
         // 先加载数据，添加集合，防止初始化时，数据还未加载完成导致空指针
         mMenuDetailBasePagers = new ArrayList<MenuDetailBasePager>();
-        mMenuDetailBasePagers.add(new NewsMenuDetailPager(mActivity));
+        mMenuDetailBasePagers.add(new NewsMenuDetailPager(mActivity,bean.getData().get(0)));
         mMenuDetailBasePagers.add(new TopicMenuDetailPager(mActivity));
         mMenuDetailBasePagers.add(new PhotosMenuDetailPager(mActivity));
         mMenuDetailBasePagers.add(new InteracMenuDetailPager(mActivity));
