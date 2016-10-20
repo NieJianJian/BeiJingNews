@@ -117,11 +117,21 @@ public class GuideActivity extends BaseActivity {
 
     class GuidePagerAdapter extends PagerAdapter {
 
+        /**
+         * 返回我们的总条数
+         */
         @Override
         public int getCount() {
             return images.size();
         }
 
+        /**
+         * 实例化具体的某个页面
+         *
+         * @param container ViewPgaer(extend ViewGroup)
+         * @param position  页面的下标index
+         * @return
+         */
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             ImageView imageView = images.get(position);
@@ -130,12 +140,22 @@ public class GuideActivity extends BaseActivity {
 //            return position;
         }
 
+        /**
+         * @param view   当前页面的视图view
+         * @param object 是instantiateItem()方法的返回值
+         * @return 上个方法实例化返回的页面，和当前页面是不是同一个页面
+         */
         @Override
         public boolean isViewFromObject(View view, Object object) {
             return view == object;
 //            return view == images.get(Integer.valueOf(object.toString()));
         }
 
+        /**
+         * @param container
+         * @param position
+         * @param object
+         */
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
 //            super.destroyItem(container, position, object);
