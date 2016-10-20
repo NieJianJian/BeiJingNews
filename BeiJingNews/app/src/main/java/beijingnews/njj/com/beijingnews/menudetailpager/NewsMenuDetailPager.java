@@ -24,7 +24,7 @@ import beijingnews.njj.com.beijingnews.menudetailpager.tabpager.TabDetailPager;
 public class NewsMenuDetailPager extends MenuDetailBasePager {
 
     List<NewsCenterPagerBean.DataBean.ChildrenBean> mChildrenBeen;
-    private List<TabDetailPager> mDetailPagers;
+    private List<MenuDetailBasePager> mDetailPagers;
 
     @ViewInject(R.id.viewpager_news_menu_detail)
     private ViewPager mViewPager;
@@ -46,7 +46,7 @@ public class NewsMenuDetailPager extends MenuDetailBasePager {
         super.initData();
 //        textView.setText("菜单——新闻详情页面");
         Log.i("niejianjian", " -> 菜单——新闻-详情页面数据被初始化了 ->");
-        mDetailPagers = new ArrayList<TabDetailPager>();
+        mDetailPagers = new ArrayList<MenuDetailBasePager>();
         for (int i = 0; i < mChildrenBeen.size(); i++) {
             TabDetailPager tabDetailPager = new TabDetailPager(mActivity, mChildrenBeen.get(i));
             mDetailPagers.add(tabDetailPager);
@@ -61,7 +61,7 @@ public class NewsMenuDetailPager extends MenuDetailBasePager {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
 //            return super.instantiateItem(container, position);
-            TabDetailPager tabDetailPager = mDetailPagers.get(position);
+            MenuDetailBasePager tabDetailPager = mDetailPagers.get(position);
             View rootView = tabDetailPager.mRootView;
             container.addView(rootView);
             tabDetailPager.initData();
@@ -81,7 +81,9 @@ public class NewsMenuDetailPager extends MenuDetailBasePager {
 
         @Override
         public boolean isViewFromObject(View view, Object object) {
-            return false;
+            // 如果返回false，任何view，都无法添加到viewpager界面上
+//            return false;
+            return view == object;
         }
     }
 

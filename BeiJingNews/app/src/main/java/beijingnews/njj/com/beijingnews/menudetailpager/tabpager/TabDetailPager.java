@@ -31,14 +31,13 @@ public class TabDetailPager extends MenuDetailBasePager {
         textView.setTextSize(30);
         textView.setGravity(Gravity.CENTER);
         textView.setTextColor(Color.RED);
-        textView.setText("5465465");
         return textView;
     }
 
     @Override
     public void initData() {
         super.initData();
-//        textView.setText(mChildrenBean.getTitle());
+        textView.setText(mChildrenBean.getTitle());
         Log.i("niejianjian", " -> TabDetailPager -> initData() -> " + mChildrenBean.getTitle());
     }
 }
