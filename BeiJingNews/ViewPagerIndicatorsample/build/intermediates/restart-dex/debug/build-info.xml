@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<instant-run
+    abi="armeabi-v7a,armeabi"
+    api-level="19"
+    density="xhdpi"
+    format="7"
+    timestamp="8925027871406"
+    token="6604949380018416410" >
+
+    <task
+        name="javac"
+        duration="750" />
+    <task
+        name="instant-run-dex"
+        duration="0" />
+    <task
+        name="instant-run-transform"
+        duration="1344" />
+    <task
+        name="verifier"
+        duration="309" />
+
+    <artifact
+        location="F:\Wroks\GitRepo\BeiJingNews\BeiJingNews\ViewPagerIndicatorsample\build\outputs\apk\VIewPagerIndicatorsample-debug.apk"
+        type="MAIN" />
+
+    <build timestamp="8925027871406" >
+        <artifact
+            location="F:\Wroks\GitRepo\BeiJingNews\BeiJingNews\ViewPagerIndicatorsample\build\outputs\apk\VIewPagerIndicatorsample-debug.apk"
+            type="MAIN" />
+    </build>
+
+</instant-run>
