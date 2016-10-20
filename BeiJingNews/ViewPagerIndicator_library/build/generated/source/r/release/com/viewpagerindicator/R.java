@@ -1902,14 +1902,16 @@ containing a value of this type.
         public static int abc_textfield_search_activated_mtrl_alpha=0x7f020048;
         public static int abc_textfield_search_default_mtrl_alpha=0x7f020049;
         public static int abc_textfield_search_material=0x7f02004a;
-        public static int notification_template_icon_bg=0x7f020052;
-        public static int vpi__tab_indicator=0x7f02004b;
-        public static int vpi__tab_selected_focused_holo=0x7f02004c;
-        public static int vpi__tab_selected_holo=0x7f02004d;
-        public static int vpi__tab_selected_pressed_holo=0x7f02004e;
-        public static int vpi__tab_unselected_focused_holo=0x7f02004f;
-        public static int vpi__tab_unselected_holo=0x7f020050;
-        public static int vpi__tab_unselected_pressed_holo=0x7f020051;
+        public static int news_tab_item_bg_select=0x7f02004b;
+        public static int notification_template_icon_bg=0x7f020054;
+        public static int vpi__tab_indicator=0x7f02004c;
+        public static int vpi__tab_selected_focused_holo=0x7f02004d;
+        public static int vpi__tab_selected_holo=0x7f02004e;
+        public static int vpi__tab_selected_pressed_holo=0x7f02004f;
+        public static int vpi__tab_textcolor_indicator=0x7f020050;
+        public static int vpi__tab_unselected_focused_holo=0x7f020051;
+        public static int vpi__tab_unselected_holo=0x7f020052;
+        public static int vpi__tab_unselected_pressed_holo=0x7f020053;
     }
     public static final class id {
         public static int action0=0x7f0b0054;

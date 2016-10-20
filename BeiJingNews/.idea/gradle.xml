@@ -10,6 +10,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/SlidingMenu_library" />
+            <option value="$PROJECT_DIR$/ViewPagerIndicator_library" />
+            <option value="$PROJECT_DIR$/ViewPagerIndicatorsample" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/xutils_library" />
           </set>
@@ -18,6 +20,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/SlidingMenu_library" />
+            <option value="$PROJECT_DIR$/ViewPagerIndicator_library" />
+            <option value="$PROJECT_DIR$/ViewPagerIndicatorsample" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/xutils_library" />
           </set>
