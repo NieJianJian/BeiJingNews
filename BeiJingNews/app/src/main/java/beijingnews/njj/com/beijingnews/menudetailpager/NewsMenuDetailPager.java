@@ -94,6 +94,12 @@ public class NewsMenuDetailPager extends MenuDetailBasePager {
             return view == object;
         }
 
+        /**
+         * 设置标题
+         *
+         * @param position
+         * @return
+         */
         @Override
         public CharSequence getPageTitle(int position) {
             return mChildrenBeen.get(position).getTitle();
