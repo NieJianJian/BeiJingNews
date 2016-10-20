@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.viewpagerindicator.TabPageIndicator;
+
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -28,6 +30,8 @@ public class NewsMenuDetailPager extends MenuDetailBasePager {
 
     @ViewInject(R.id.viewpager_news_menu_detail)
     private ViewPager mViewPager;
+    @ViewInject(R.id.tabpageindicator)
+    private TabPageIndicator mTabPageIndicator;
 
     public NewsMenuDetailPager(Activity activity, NewsCenterPagerBean.DataBean dataBean) {
         super(activity);
@@ -54,6 +58,10 @@ public class NewsMenuDetailPager extends MenuDetailBasePager {
 
         // 设置适配器
         mViewPager.setAdapter(new NewsMenuDetailPagerAdapter());
+
+        // TabPageIndicator和ViewPager关联
+        mTabPageIndicator.setViewPager(mViewPager);
+
     }
 
     class NewsMenuDetailPagerAdapter extends PagerAdapter {
@@ -84,6 +92,12 @@ public class NewsMenuDetailPager extends MenuDetailBasePager {
             // 如果返回false，任何view，都无法添加到viewpager界面上
 //            return false;
             return view == object;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mChildrenBeen.get(position).getTitle();
+//            return super.getPageTitle(position);
         }
     }
 

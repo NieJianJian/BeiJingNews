@@ -27,4 +27,5 @@ dependencies {
     compile project(':SlidingMenu_library')
     compile project(':xutils_library')
     compile files('libs/gson-2.2.1.jar')
+    compile project(':ViewPagerIndicator_library')
 }
