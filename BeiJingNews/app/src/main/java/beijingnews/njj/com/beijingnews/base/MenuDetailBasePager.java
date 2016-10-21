@@ -1,7 +1,6 @@
 package beijingnews.njj.com.beijingnews.base;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -13,7 +12,6 @@ public abstract class MenuDetailBasePager {
     public View mRootView;
 
     public MenuDetailBasePager(Activity activity) {
-        Log.i("niejianjian"," -> MenuDetailBasePager ->");
         this.mActivity = activity;
         mRootView = initView();
     }
