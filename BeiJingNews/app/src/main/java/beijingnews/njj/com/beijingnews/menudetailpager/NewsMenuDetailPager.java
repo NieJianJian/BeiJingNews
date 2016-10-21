@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.viewpagerindicator.TabPageIndicator;
 
@@ -32,6 +33,8 @@ public class NewsMenuDetailPager extends MenuDetailBasePager {
     private ViewPager mViewPager;
     @ViewInject(R.id.tabpageindicator)
     private TabPageIndicator mTabPageIndicator;
+    @ViewInject(R.id.ib_tab_next)
+    private ImageButton mIbTabNext;
 
     public NewsMenuDetailPager(Activity activity, NewsCenterPagerBean.DataBean dataBean) {
         super(activity);
@@ -50,6 +53,13 @@ public class NewsMenuDetailPager extends MenuDetailBasePager {
         super.initData();
 //        textView.setText("菜单——新闻详情页面");
         Log.i("niejianjian", " -> 菜单——新闻-详情页面数据被初始化了 ->");
+        mIbTabNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+            }
+        });
+
         mDetailPagers = new ArrayList<MenuDetailBasePager>();
         for (int i = 0; i < mChildrenBeen.size(); i++) {
             TabDetailPager tabDetailPager = new TabDetailPager(mActivity, mChildrenBeen.get(i));
