@@ -25,7 +25,23 @@ public class NoScrollViewPager extends ViewPager {
      */
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        return true;
+        return false;
 //        return super.onTouchEvent(ev);
     }
+
+    /**
+     * 返回false，表示当前不拦截，传递到下一层，也就是子view去处理
+     *
+     * @param ev
+     * @return
+     */
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return false;
+    }
+
+    /**
+     * 无法控制slidemenu，就取消掉slidemenu的滑动，当滑动到第一个viewpager页面的时候，再出现slidemenu
+     */
+
 }
