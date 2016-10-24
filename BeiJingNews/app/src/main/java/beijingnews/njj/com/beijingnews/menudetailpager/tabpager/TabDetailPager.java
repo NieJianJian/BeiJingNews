@@ -58,6 +58,7 @@ public class TabDetailPager extends MenuDetailBasePager {
     private List<TabDetailPagerBean.Topnews> topnews;
     private ImageOptions imageOptions;
     private int widthDpi;
+    private int preSelectPosition = 0;
 
     public TabDetailPager(Activity activity, NewsCenterPagerBean.DataBean.ChildrenBean childrenBean) {
         super(activity);
@@ -161,9 +162,38 @@ public class TabDetailPager extends MenuDetailBasePager {
             point.setLayoutParams(params);
             // 把点添加到线性布局中去
             mLl_Poing_TabDetail.addView(point);
+        }
+
+        // 设置页面的监听
+        mViewPager_TabDetail.setOnPageChangeListener(new TopNewsOnPageChangeListener());
+        // 默认设置第0个高亮显示
+        mLl_Poing_TabDetail.getChildAt(0).setEnabled(true);
+        mTextView_TabDetail.setText(topnews.get(preSelectPosition).getTitle());
+
+    }
+
+    class TopNewsOnPageChangeListener implements ViewPager.OnPageChangeListener {
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
         }
 
+        @Override
+        public void onPageSelected(int position) {
+            // 取消上一个点的高亮显示
+            mLl_Poing_TabDetail.getChildAt(preSelectPosition).setEnabled(false);
+            // 设置当前选中点的高亮显示
+            mLl_Poing_TabDetail.getChildAt(position).setEnabled(true);
+            mTextView_TabDetail.setText(topnews.get(position).getTitle());
+            // 更新记录高亮点
+            preSelectPosition = position;
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
     }
 
     class TopnewsAdapter extends PagerAdapter {
