@@ -82,10 +82,12 @@ public class TabDetailPager extends MenuDetailBasePager {
     public View initView() {
         View view = View.inflate(mActivity, R.layout.tabdetail_pager, null);
         x.view().inject(this, view);
-//        textView = new TextView(mActivity);
-//        textView.setTextSize(30);
-//        textView.setGravity(Gravity.CENTER);
-//        textView.setTextColor(Color.RED);
+
+        View topnews_view = View.inflate(mActivity, R.layout.topnews_part, null);
+        x.view().inject(this, topnews_view);
+
+        mListView_TabDetail.addHeaderView(topnews_view);
+
         return view;
     }
 
