@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -55,6 +56,7 @@ public class TabDetailPager extends MenuDetailBasePager {
 
     private String url;
     private final NewsCenterPagerBean.DataBean.ChildrenBean mChildrenBean;
+    private List<TabDetailPagerBean.News> news;
     //    TextView textView;
     private List<TabDetailPagerBean.Topnews> topnews;
     private ImageOptions imageOptions;
@@ -171,6 +173,59 @@ public class TabDetailPager extends MenuDetailBasePager {
         mLl_Poing_TabDetail.getChildAt(0).setEnabled(true);
         mTextView_TabDetail.setText(topnews.get(preSelectPosition).getTitle());
 
+        // 设置ListView的适配器
+        news = detailPagerBean.getData().getNews();
+        mListView_TabDetail.setAdapter(new NewsListAdapter());
+
+    }
+
+    class NewsListAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return news.size();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
+            if (convertView == null) {
+                convertView = View.inflate(mActivity, R.layout.table_detail_item, null);
+                holder = new ViewHolder();
+                holder.iv_icon_tab_detail = (ImageView) convertView.findViewById(R.id.iv_icon_tab_detail);
+                holder.tv_title_tab_detail = (TextView) convertView.findViewById(R.id.tv_title_tab_detail);
+                holder.tv_time_table_detail = (TextView) convertView.findViewById(R.id.tv_time_table_detail);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            // 根据位置得到数据
+            TabDetailPagerBean.News newsItem = TabDetailPager.this.news.get(position);
+            holder.tv_title_tab_detail.setText(newsItem.getTitle());
+            holder.tv_time_table_detail.setText(newsItem.getPubdate());
+            x.image().bind(holder.iv_icon_tab_detail,
+                    newsItem.getListimage().
+                            replaceAll("http://10.0.2.2:8080/zhbj", ConstantUtils.base_url),
+                    imageOptions);
+
+            return convertView;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+    }
+
+    static class ViewHolder {
+        ImageView iv_icon_tab_detail;
+        TextView tv_title_tab_detail;
+        TextView tv_time_table_detail;
     }
 
     class TopNewsOnPageChangeListener implements ViewPager.OnPageChangeListener {
