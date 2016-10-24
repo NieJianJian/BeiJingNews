@@ -36,6 +36,7 @@ import beijingnews.njj.com.beijingnews.domain.NewsCenterPagerBean;
 import beijingnews.njj.com.beijingnews.domain.TabDetailPagerBean;
 import beijingnews.njj.com.beijingnews.utils.CacheUtils;
 import beijingnews.njj.com.beijingnews.utils.ConstantUtils;
+import beijingnews.njj.com.beijingnews.view.HorizontalViewPager;
 
 /**
  * 代表页签页面
@@ -44,7 +45,7 @@ import beijingnews.njj.com.beijingnews.utils.ConstantUtils;
 public class TabDetailPager extends MenuDetailBasePager {
 
     @ViewInject(R.id.viewpager_tabdetail)
-    private ViewPager mViewPager_TabDetail;
+    private HorizontalViewPager mViewPager_TabDetail;
     @ViewInject(R.id.tv_tabledetail)
     private TextView mTextView_TabDetail;
     @ViewInject(R.id.listview_tabdetail)

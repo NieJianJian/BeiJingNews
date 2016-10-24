@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="180dp">
 
-        <android.support.v4.view.ViewPager
+        <beijingnews.njj.com.beijingnews.view.HorizontalViewPager
             android:id="@+id/viewpager_tabdetail"
             android:layout_width="match_parent"
             android:layout_height="180dp"/>
