@@ -18,6 +18,7 @@ public class RefreshListView extends ListView {
     private View ll_pull_down_refresh; // 下拉刷新控件
     private int pull_down_refresh_height;
     private float startY;
+    private View topnews_view; //
 
     public RefreshListView(Context context) {
         super(context);
@@ -61,8 +62,16 @@ public class RefreshListView extends ListView {
                 break;
 
         }
-
-
         return super.onTouchEvent(ev);
+    }
+
+    /**
+     * 将轮播图传递进来，主要用于获得轮播图距离顶部的距离，来处理headerview的显示和隐藏
+     *
+     * @param topnews_view
+     */
+    public void addTopNewsView(View topnews_view) {
+        this.topnews_view = topnews_view;
+        mHeaderView.addView(topnews_view);
     }
 }

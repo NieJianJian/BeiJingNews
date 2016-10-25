@@ -86,7 +86,8 @@ public class TabDetailPager extends MenuDetailBasePager {
         View topnews_view = View.inflate(mActivity, R.layout.topnews_part, null);
         x.view().inject(this, topnews_view);
 
-        mListView_TabDetail.addHeaderView(topnews_view);
+//        mListView_TabDetail.addHeaderView(topnews_view); // 调用自定义的添加view
+        mListView_TabDetail.addTopNewsView(topnews_view);
 
         return view;
     }
