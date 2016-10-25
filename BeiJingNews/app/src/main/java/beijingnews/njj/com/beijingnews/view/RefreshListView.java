@@ -18,7 +18,8 @@ public class RefreshListView extends ListView {
     private View ll_pull_down_refresh; // 下拉刷新控件
     private int pull_down_refresh_height;
     private float startY;
-    private View topnews_view; //
+    private View topnews_view; // 顶部轮播图
+    private float listViewOnScreenY = -1; // 在屏幕上listview的y轴的坐标
 
     public RefreshListView(Context context) {
         super(context);
@@ -50,6 +51,13 @@ public class RefreshListView extends ListView {
             case MotionEvent.ACTION_MOVE:
                 float endY = ev.getY();
                 float distanceY = endY - startY;
+
+                // 轮播图不完全显示，就没必要做任何处理（减少代码处理量）
+                boolean isDisplayTopNewsView = isDisplayTopNewsView();
+                if (!isDisplayTopNewsView) {
+                    break;
+                }
+
                 if (distanceY > 0) {
                     float topPadding = -pull_down_refresh_height + distanceY;
                     ll_pull_down_refresh.setPadding(0, (int) topPadding, 0, 0);
@@ -66,6 +74,28 @@ public class RefreshListView extends ListView {
     }
 
     /**
+     * 判断顶部轮播图是否完全显示
+     * 当listview屏幕上的y坐标小于或者等于顶部轮播图在屏幕上的y坐标的时候，完全显示轮播图
+     *
+     * @return
+     */
+    private boolean isDisplayTopNewsView() {
+        // 计算listview在屏幕上的坐标
+        int[] location = new int[2];
+        if (listViewOnScreenY == -1) {
+            // this代表listview
+            this.getLocationOnScreen(location);
+            listViewOnScreenY = location[1];
+        }
+
+        // 计算顶部轮播图在屏幕上的坐标
+        topnews_view.getLocationOnScreen(location);
+        float topNewsViewOnScreenY = location[1];
+
+        return listViewOnScreenY <= topNewsViewOnScreenY;
+    }
+
+    /**
      * 将轮播图传递进来，主要用于获得轮播图距离顶部的距离，来处理headerview的显示和隐藏
      *
      * @param topnews_view
@@ -74,4 +104,6 @@ public class RefreshListView extends ListView {
         this.topnews_view = topnews_view;
         mHeaderView.addView(topnews_view);
     }
+
+
 }
