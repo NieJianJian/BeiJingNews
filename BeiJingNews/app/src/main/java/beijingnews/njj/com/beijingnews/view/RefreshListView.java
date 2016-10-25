@@ -4,8 +4,13 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import beijingnews.njj.com.beijingnews.R;
 
@@ -20,18 +25,53 @@ public class RefreshListView extends ListView {
     private float startY;
     private View topnews_view; // 顶部轮播图
     private float listViewOnScreenY = -1; // 在屏幕上listview的y轴的坐标
+    private Animation upAnimation, downAnimation;
+
+    private ImageView iv_red_arrow;
+    private ProgressBar pb_refresh_header;
+    private TextView tv_state_refresh_header;
+    private TextView tv_time_refresh_header;
+
+    public static final int PULL_DOWN_REFRESH = 1;
+    public static final int RELEASE_REFRESH = 2;
+    public static final int REFRESHING = 3;
+
+    private int currentState = PULL_DOWN_REFRESH;
 
     public RefreshListView(Context context) {
         super(context);
+        initHeaderView(context);
+        initAnimation(context);
     }
 
     public RefreshListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initHeaderView(context);
+        initAnimation(context);
+    }
+
+    private void initAnimation(Context context) {
+        upAnimation = new RotateAnimation(0, 180,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+        upAnimation.setDuration(500);
+        upAnimation.setFillAfter(true);
+
+        downAnimation = new RotateAnimation(-180, -360,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+        downAnimation.setDuration(500);
+        downAnimation.setFillAfter(true);
     }
 
     private void initHeaderView(Context context) {
         mHeaderView = (LinearLayout) View.inflate(context, R.layout.refresh_header, null);
+
+        iv_red_arrow = (ImageView) mHeaderView.findViewById(R.id.iv_red_arrow);
+        pb_refresh_header = (ProgressBar) mHeaderView.findViewById(R.id.pb_refresh_header);
+        tv_state_refresh_header = (TextView) mHeaderView.findViewById(R.id.tv_state_refresh_header);
+        tv_time_refresh_header = (TextView) mHeaderView.findViewById(R.id.tv_time_refresh_header);
+
         ll_pull_down_refresh = mHeaderView.findViewById(R.id.ll_pull_down_refresh);
 
         ll_pull_down_refresh.measure(0, 0); // 测量
@@ -52,25 +92,59 @@ public class RefreshListView extends ListView {
                 float endY = ev.getY();
                 float distanceY = endY - startY;
 
+                if (currentState == REFRESHING) break;
+
                 // 轮播图不完全显示，就没必要做任何处理（减少代码处理量）
                 boolean isDisplayTopNewsView = isDisplayTopNewsView();
-                if (!isDisplayTopNewsView) {
-                    break;
-                }
+                if (!isDisplayTopNewsView) break;
 
                 if (distanceY > 0) {
                     float topPadding = -pull_down_refresh_height + distanceY;
+                    if (topPadding > 0 && currentState != RELEASE_REFRESH) {
+                        currentState = RELEASE_REFRESH;
+                        refreshHeaderViewState();
+                    } else if (topPadding < 0 && currentState != PULL_DOWN_REFRESH) {
+                        currentState = PULL_DOWN_REFRESH;
+                        refreshHeaderViewState();
+                    }
                     ll_pull_down_refresh.setPadding(0, (int) topPadding, 0, 0);
                 }
                 break;
             case MotionEvent.ACTION_UP:
-
+                if (currentState == PULL_DOWN_REFRESH) {
+                    ll_pull_down_refresh.setPadding(0, -pull_down_refresh_height, 0, 0); // 直接隐藏
+                } else if (currentState == RELEASE_REFRESH) {
+                    currentState = REFRESHING;
+                    refreshHeaderViewState();
+                    ll_pull_down_refresh.setPadding(0, 0, 0, 0); // 完全显示
+                }
                 break;
             default:
                 break;
 
         }
         return super.onTouchEvent(ev);
+    }
+
+    private void refreshHeaderViewState() {
+        switch (currentState) {
+            case PULL_DOWN_REFRESH:
+                tv_state_refresh_header.setText("下拉刷新");
+                iv_red_arrow.startAnimation(downAnimation);
+                break;
+            case RELEASE_REFRESH:
+                tv_state_refresh_header.setText("释放刷新");
+                iv_red_arrow.startAnimation(upAnimation);
+                break;
+            case REFRESHING:
+                tv_state_refresh_header.setText("正在刷新...");
+                iv_red_arrow.clearAnimation();
+                iv_red_arrow.setVisibility(View.GONE);
+                pb_refresh_header.setVisibility(View.VISIBLE);
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -104,6 +178,5 @@ public class RefreshListView extends ListView {
         this.topnews_view = topnews_view;
         mHeaderView.addView(topnews_view);
     }
-
 
 }
