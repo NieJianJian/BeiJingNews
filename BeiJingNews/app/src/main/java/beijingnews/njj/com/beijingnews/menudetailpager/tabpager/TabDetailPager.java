@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.NetworkResponse;
@@ -38,6 +37,7 @@ import beijingnews.njj.com.beijingnews.domain.TabDetailPagerBean;
 import beijingnews.njj.com.beijingnews.utils.CacheUtils;
 import beijingnews.njj.com.beijingnews.utils.ConstantUtils;
 import beijingnews.njj.com.beijingnews.view.HorizontalViewPager;
+import beijingnews.njj.com.beijingnews.view.RefreshListView;
 
 /**
  * 代表页签页面
@@ -50,7 +50,7 @@ public class TabDetailPager extends MenuDetailBasePager {
     @ViewInject(R.id.tv_tabledetail)
     private TextView mTextView_TabDetail;
     @ViewInject(R.id.listview_tabdetail)
-    private ListView mListView_TabDetail;
+    private RefreshListView mListView_TabDetail;
     @ViewInject(R.id.ll_poing_tabledetail)
     private LinearLayout mLl_Poing_TabDetail;
 

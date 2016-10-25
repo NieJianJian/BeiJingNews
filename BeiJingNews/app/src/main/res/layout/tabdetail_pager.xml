@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <ListView
+    <beijingnews.njj.com.beijingnews.view.RefreshListView
         android:id="@+id/listview_tabdetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
