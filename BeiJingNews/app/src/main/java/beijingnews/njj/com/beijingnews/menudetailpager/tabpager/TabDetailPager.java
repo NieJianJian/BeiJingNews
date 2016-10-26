@@ -1,12 +1,14 @@
 package beijingnews.njj.com.beijingnews.menudetailpager.tabpager;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -46,6 +48,7 @@ import beijingnews.njj.com.beijingnews.view.RefreshListView;
  */
 public class TabDetailPager extends MenuDetailBasePager {
 
+    public static final String READ_ARRAY_ID = "read_array_id";
     @ViewInject(R.id.viewpager_tabdetail)
     private HorizontalViewPager mViewPager_TabDetail;
     @ViewInject(R.id.tv_tabledetail)
@@ -95,7 +98,28 @@ public class TabDetailPager extends MenuDetailBasePager {
         mListView_TabDetail.addTopNewsView(topnews_view);
         mListView_TabDetail.setOnRefreshListener(new MyOnRefreshListener());
 
+        mListView_TabDetail.setOnItemClickListener(new MyOnItemClickListener());
+
         return view;
+    }
+
+    class MyOnItemClickListener implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            int realPosition = position - 1;
+            TabDetailPagerBean.News newsItem = TabDetailPager.this.news.get(realPosition);
+            Log.i("niejianjian", "realPosition -> " + realPosition
+                    + " ; newsItem.Id -> " + newsItem.getId()
+                    + " ; newsItem.title -> " + newsItem.getTitle());
+            // 首先读取id是否被保存，如果没有被保存，就去保存，并且发送消息更新
+            String saveIds = CacheUtils.getString(mActivity, READ_ARRAY_ID);
+            if (!saveIds.contains(newsItem.getId() + "")) {
+                CacheUtils.putString(mActivity, READ_ARRAY_ID, saveIds + newsItem.getId() + ",");
+                mNewsListAdapter.notifyDataSetChanged(); // getCount() -> getView()
+            }
+
+        }
     }
 
     @Override
@@ -293,6 +317,16 @@ public class TabDetailPager extends MenuDetailBasePager {
             TabDetailPagerBean.News newsItem = TabDetailPager.this.news.get(position);
             holder.tv_title_tab_detail.setText(newsItem.getTitle());
             holder.tv_time_table_detail.setText(newsItem.getPubdate());
+
+            String saveIds = CacheUtils.getString(mActivity, READ_ARRAY_ID);
+            if (saveIds.contains(newsItem.getId() + "")) {
+                // 灰色
+                holder.tv_title_tab_detail.setTextColor(Color.GRAY);
+            } else {
+                // 黑色
+                holder.tv_title_tab_detail.setTextColor(Color.BLACK);
+            }
+
             x.image().bind(holder.iv_icon_tab_detail,
                     newsItem.getListimage().
                             replaceAll("http://10.0.2.2:8080/zhbj", ConstantUtils.base_url),
