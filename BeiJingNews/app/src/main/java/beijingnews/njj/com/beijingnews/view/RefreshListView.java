@@ -24,11 +24,12 @@ public class RefreshListView extends ListView {
 
     private LinearLayout mHeaderView;
     private View ll_pull_down_refresh; // 下拉刷新控件
-    private int pull_down_refresh_height;
+    private int pull_down_refresh_height, footerViewHeight;
     private float startY;
     private View topnews_view; // 顶部轮播图
     private float listViewOnScreenY = -1; // 在屏幕上listview的y轴的坐标
     private Animation upAnimation, downAnimation;
+    private View mFooterView;
 
     private ImageView iv_red_arrow;
     private ProgressBar pb_refresh_header;
@@ -44,12 +45,14 @@ public class RefreshListView extends ListView {
     public RefreshListView(Context context) {
         super(context);
         initHeaderView(context);
+        initFooterView(context);
         initAnimation(context);
     }
 
     public RefreshListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initHeaderView(context);
+        initFooterView(context);
         initAnimation(context);
     }
 
@@ -65,6 +68,17 @@ public class RefreshListView extends ListView {
                 Animation.RELATIVE_TO_SELF, 0.5f);
         downAnimation.setDuration(500);
         downAnimation.setFillAfter(true);
+    }
+
+    private void initFooterView(Context context) {
+        mFooterView = View.inflate(context, R.layout.footerview, null);
+
+        mFooterView.measure(0, 0);
+        footerViewHeight = mFooterView.getMeasuredHeight();
+        // footerview有10个的padding
+        mFooterView.setPadding(10, -footerViewHeight + 10, 10, 10);
+
+        this.addFooterView(mFooterView);
     }
 
     private void initHeaderView(Context context) {
