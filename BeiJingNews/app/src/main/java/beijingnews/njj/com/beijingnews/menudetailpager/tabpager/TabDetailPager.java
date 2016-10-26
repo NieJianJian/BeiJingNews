@@ -62,6 +62,7 @@ public class TabDetailPager extends MenuDetailBasePager {
     private ImageOptions imageOptions;
     private int widthDpi;
     private int preSelectPosition = 0;
+    private boolean isPullDownRefresh = false;
 
     public TabDetailPager(Activity activity, NewsCenterPagerBean.DataBean.ChildrenBean childrenBean) {
         super(activity);
@@ -88,6 +89,7 @@ public class TabDetailPager extends MenuDetailBasePager {
 
 //        mListView_TabDetail.addHeaderView(topnews_view); // 调用自定义的添加view
         mListView_TabDetail.addTopNewsView(topnews_view);
+        mListView_TabDetail.setOnRefreshListener(new MyOnRefreshListener());
 
         return view;
     }
@@ -115,12 +117,20 @@ public class TabDetailPager extends MenuDetailBasePager {
             @Override
             public void onResponse(String s) {
                 Log.i("niejianjian", " -> ************** onResponse -> s = " + s);
+                if (!isPullDownRefresh) {
+                    isPullDownRefresh = true;
+                    mListView_TabDetail.onRefreshFinish(true);
+                }
                 CacheUtils.putString(mActivity, url, s);
                 processData(s);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                if (!isPullDownRefresh) {
+                    isPullDownRefresh = true;
+                    mListView_TabDetail.onRefreshFinish(false);
+                }
                 Log.i("niejianjian", " -> ************** onErrorResponse -> volleyError = " + volleyError);
             }
         }) { // code -> override,实现下面的方法，解决乱码问题
@@ -180,6 +190,15 @@ public class TabDetailPager extends MenuDetailBasePager {
         news = detailPagerBean.getData().getNews();
         mListView_TabDetail.setAdapter(new NewsListAdapter());
 
+    }
+
+    class MyOnRefreshListener implements RefreshListView.OnRefreshListener {
+
+        @Override
+        public void onPullDownRefresh() {
+            isPullDownRefresh = false;
+            getDataFromNet();
+        }
     }
 
     class NewsListAdapter extends BaseAdapter {

@@ -12,6 +12,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import beijingnews.njj.com.beijingnews.R;
 
 /**
@@ -117,6 +120,11 @@ public class RefreshListView extends ListView {
                     currentState = REFRESHING;
                     refreshHeaderViewState();
                     ll_pull_down_refresh.setPadding(0, 0, 0, 0); // 完全显示
+
+                    // 联网请求
+                    if (mOnRefreshListener != null) {
+                        mOnRefreshListener.onPullDownRefresh();
+                    }
                 }
                 break;
             default:
@@ -177,6 +185,40 @@ public class RefreshListView extends ListView {
     public void addTopNewsView(View topnews_view) {
         this.topnews_view = topnews_view;
         mHeaderView.addView(topnews_view);
+    }
+
+    /**
+     * @param isPullDownRefresh 更新成功与否
+     */
+    public void onRefreshFinish(boolean isPullDownRefresh) {
+        ll_pull_down_refresh.setPadding(0, -pull_down_refresh_height, 0, 0);
+        currentState = PULL_DOWN_REFRESH;
+        iv_red_arrow.setVisibility(View.VISIBLE);
+        pb_refresh_header.setVisibility(View.GONE);
+        iv_red_arrow.clearAnimation();
+
+        if (isPullDownRefresh) {
+            // 更新时间
+            tv_time_refresh_header.setText(getSystemTime());
+        }
+    }
+
+    /**
+     * 得到系统时间
+     */
+    public CharSequence getSystemTime() {
+        SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+        return format.format(new Date());
+    }
+
+    public interface OnRefreshListener {
+        public void onPullDownRefresh();
+    }
+
+    private OnRefreshListener mOnRefreshListener;
+
+    public void setOnRefreshListener(OnRefreshListener onRefreshListener) {
+        this.mOnRefreshListener = onRefreshListener;
     }
 
 }
