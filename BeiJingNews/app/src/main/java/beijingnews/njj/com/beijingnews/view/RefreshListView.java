@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -30,6 +31,7 @@ public class RefreshListView extends ListView {
     private float listViewOnScreenY = -1; // 在屏幕上listview的y轴的坐标
     private Animation upAnimation, downAnimation;
     private View mFooterView;
+    private boolean isLoadMore;
 
     private ImageView iv_red_arrow;
     private ProgressBar pb_refresh_header;
@@ -79,6 +81,45 @@ public class RefreshListView extends ListView {
         mFooterView.setPadding(10, -footerViewHeight + 10, 10, 10);
 
         this.addFooterView(mFooterView);
+
+        // 滑动监听
+        setOnScrollListener(new MyOnScrollListener());
+    }
+
+    class MyOnScrollListener implements OnScrollListener {
+
+        /**
+         * @param view
+         * @param scrollState
+         */
+        @Override
+        public void onScrollStateChanged(AbsListView view, int scrollState) {
+            if (scrollState == SCROLL_STATE_FLING || scrollState == SCROLL_STATE_IDLE) {
+                if (getLastVisiblePosition() == (getCount() - 1)) {
+                    // 1.显示加载更多控件
+                    mFooterView.setPadding(10, 10, 10, 10);
+                    // 2.设置状态isLoadMore
+                    isLoadMore = true;
+                    // 3.选择我们滑动到的最后一条
+                    setSelection(getCount()); // 此方法可以省略
+                    // 4.回调接口
+                    if (mOnRefreshListener != null) {
+                        mOnRefreshListener.onLoadMore();
+                    }
+                }
+            }
+        }
+
+        /**
+         * @param view
+         * @param firstVisibleItem
+         * @param visibleItemCount
+         * @param totalItemCount
+         */
+        @Override
+        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+        }
     }
 
     private void initHeaderView(Context context) {
@@ -205,15 +246,20 @@ public class RefreshListView extends ListView {
      * @param isPullDownRefresh 更新成功与否
      */
     public void onRefreshFinish(boolean isPullDownRefresh) {
-        ll_pull_down_refresh.setPadding(0, -pull_down_refresh_height, 0, 0);
-        currentState = PULL_DOWN_REFRESH;
-        iv_red_arrow.setVisibility(View.VISIBLE);
-        pb_refresh_header.setVisibility(View.GONE);
-        iv_red_arrow.clearAnimation();
+        if (isLoadMore) {
+            mFooterView.setPadding(10, -footerViewHeight + 10, 10, 10);
+            isLoadMore = false;
+        } else {
+            ll_pull_down_refresh.setPadding(0, -pull_down_refresh_height, 0, 0);
+            currentState = PULL_DOWN_REFRESH;
+            iv_red_arrow.setVisibility(View.VISIBLE);
+            pb_refresh_header.setVisibility(View.GONE);
+            iv_red_arrow.clearAnimation();
 
-        if (isPullDownRefresh) {
-            // 更新时间
-            tv_time_refresh_header.setText(getSystemTime());
+            if (isPullDownRefresh) {
+                // 更新时间
+                tv_time_refresh_header.setText(getSystemTime());
+            }
         }
     }
 
@@ -227,6 +273,8 @@ public class RefreshListView extends ListView {
 
     public interface OnRefreshListener {
         public void onPullDownRefresh();
+
+        public void onLoadMore();
     }
 
     private OnRefreshListener mOnRefreshListener;

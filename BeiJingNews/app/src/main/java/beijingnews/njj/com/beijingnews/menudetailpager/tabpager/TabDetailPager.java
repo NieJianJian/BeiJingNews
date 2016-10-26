@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -63,6 +64,9 @@ public class TabDetailPager extends MenuDetailBasePager {
     private int widthDpi;
     private int preSelectPosition = 0;
     private boolean isPullDownRefresh = false;
+    private String moreUrl;
+    private boolean isLoadMore = false;
+    private NewsListAdapter mNewsListAdapter;
 
     public TabDetailPager(Activity activity, NewsCenterPagerBean.DataBean.ChildrenBean childrenBean) {
         super(activity);
@@ -105,7 +109,7 @@ public class TabDetailPager extends MenuDetailBasePager {
         if (!TextUtils.isEmpty(json)) {
             processData(json);
         }
-
+        mNewsListAdapter = new NewsListAdapter();
         // 联网请求数据
         getDataFromNet();
     }
@@ -149,47 +153,68 @@ public class TabDetailPager extends MenuDetailBasePager {
     }
 
     private void processData(String json) {
-        Gson gson = new Gson();
-        TabDetailPagerBean detailPagerBean = gson.fromJson(json, TabDetailPagerBean.class);
+        TabDetailPagerBean detailPagerBean = getTabDetailPagerBean(json);
         Log.i("niejianjian", "TabDetailPager -> processData -> detailPagerBean = " + detailPagerBean.getData().getNews().get(0).getTitle());
 
-        topnews = detailPagerBean.getData().getTopnews();
+        if (!isLoadMore) {
+            // 原来的处理
+            topnews = detailPagerBean.getData().getTopnews();
 
-        mViewPager_TabDetail.setAdapter(new TopnewsAdapter());
+            mViewPager_TabDetail.setAdapter(new TopnewsAdapter());
 
-        // 把所有的点移除（因为添加了缓存，这个方法会执行两边，防止重复，所以，第二次执行前，先把之前的清空）
-        mLl_Poing_TabDetail.removeAllViews();
-        widthDpi = beijingnews.njj.com.beijingnews.utils.DensityUtil.dip2px(mActivity, 5);
-        // 设置红点
-        for (int i = 0; i < topnews.size(); i++) {
-            ImageView point = new ImageView(mActivity);
-            point.setBackgroundResource(R.drawable.tabdetail_point_selector);
+            // 把所有的点移除（因为添加了缓存，这个方法会执行两边，防止重复，所以，第二次执行前，先把之前的清空）
+            mLl_Poing_TabDetail.removeAllViews();
+            widthDpi = beijingnews.njj.com.beijingnews.utils.DensityUtil.dip2px(mActivity, 5);
+            // 设置红点
+            for (int i = 0; i < topnews.size(); i++) {
+                ImageView point = new ImageView(mActivity);
+                point.setBackgroundResource(R.drawable.tabdetail_point_selector);
 
-            // 添加到线性布局中
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(widthDpi, widthDpi);
-            if (i != 0) {
-                params.leftMargin = widthDpi;
+                // 添加到线性布局中
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(widthDpi, widthDpi);
+                if (i != 0) {
+                    params.leftMargin = widthDpi;
+                }
+                if (i == 0) {
+                    point.setEnabled(true);
+                } else {
+                    point.setEnabled(false);
+                }
+                point.setLayoutParams(params);
+                // 把点添加到线性布局中去
+                mLl_Poing_TabDetail.addView(point);
             }
-            if (i == 0) {
-                point.setEnabled(true);
-            } else {
-                point.setEnabled(false);
-            }
-            point.setLayoutParams(params);
-            // 把点添加到线性布局中去
-            mLl_Poing_TabDetail.addView(point);
+
+            // 设置页面的监听
+            mViewPager_TabDetail.setOnPageChangeListener(new TopNewsOnPageChangeListener());
+            // 默认设置第0个高亮显示
+            mLl_Poing_TabDetail.getChildAt(0).setEnabled(true);
+            mTextView_TabDetail.setText(topnews.get(preSelectPosition).getTitle());
+
+            // 设置ListView的适配器
+            news = detailPagerBean.getData().getNews();
+            mListView_TabDetail.setAdapter(mNewsListAdapter);
+
+        } else {
+            // 加载更多的处理
+            // 1.得到加载更多的数据
+            List<TabDetailPagerBean.News> moreNews = detailPagerBean.getData().getNews();
+            // 2.把加载更多的数据放到原来的集合中
+            news.addAll(moreNews);
+            // 3.刷新数据
+            mNewsListAdapter.notifyDataSetChanged();
         }
+    }
 
-        // 设置页面的监听
-        mViewPager_TabDetail.setOnPageChangeListener(new TopNewsOnPageChangeListener());
-        // 默认设置第0个高亮显示
-        mLl_Poing_TabDetail.getChildAt(0).setEnabled(true);
-        mTextView_TabDetail.setText(topnews.get(preSelectPosition).getTitle());
-
-        // 设置ListView的适配器
-        news = detailPagerBean.getData().getNews();
-        mListView_TabDetail.setAdapter(new NewsListAdapter());
-
+    private TabDetailPagerBean getTabDetailPagerBean(String json) {
+        Gson gson = new Gson();
+        TabDetailPagerBean detailPagerBean = gson.fromJson(json, TabDetailPagerBean.class);
+        if (TextUtils.isEmpty(detailPagerBean.getData().getMore())) {
+            moreUrl = "";
+        } else {
+            moreUrl = ConstantUtils.base_url + detailPagerBean.getData().getMore();
+        }
+        return detailPagerBean;
     }
 
     class MyOnRefreshListener implements RefreshListView.OnRefreshListener {
@@ -199,6 +224,49 @@ public class TabDetailPager extends MenuDetailBasePager {
             isPullDownRefresh = false;
             getDataFromNet();
         }
+
+        @Override
+        public void onLoadMore() {
+            if (TextUtils.isEmpty(moreUrl)) {
+                // 隐藏加载更多布局
+                mListView_TabDetail.onRefreshFinish(false);
+                // 不需要加载更多
+                Toast.makeText(mActivity, "没有更多数据了", Toast.LENGTH_SHORT).show();
+            } else {
+                getMoreDataFromNet();
+            }
+        }
+    }
+
+    private void getMoreDataFromNet() {
+        RequestQueue queue = Volley.newRequestQueue(mActivity);
+        StringRequest request = new StringRequest(Request.Method.GET, moreUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                isLoadMore = true;
+                // 隐藏加载更多布局
+                mListView_TabDetail.onRefreshFinish(false);
+
+                processData(s);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        }) {
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String jsonData = new String(response.data, "UTF-8");
+                    return Response.success(jsonData, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                return super.parseNetworkResponse(response);
+            }
+        };
+        queue.add(request);
     }
 
     class NewsListAdapter extends BaseAdapter {
