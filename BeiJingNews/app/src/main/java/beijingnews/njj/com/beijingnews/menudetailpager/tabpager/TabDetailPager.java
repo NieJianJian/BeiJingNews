@@ -1,6 +1,7 @@
 package beijingnews.njj.com.beijingnews.menudetailpager.tabpager;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -34,6 +35,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import beijingnews.njj.com.beijingnews.R;
+import beijingnews.njj.com.beijingnews.activity.NewsDetailActivity;
 import beijingnews.njj.com.beijingnews.base.MenuDetailBasePager;
 import beijingnews.njj.com.beijingnews.domain.NewsCenterPagerBean;
 import beijingnews.njj.com.beijingnews.domain.TabDetailPagerBean;
@@ -118,6 +120,10 @@ public class TabDetailPager extends MenuDetailBasePager {
                 CacheUtils.putString(mActivity, READ_ARRAY_ID, saveIds + newsItem.getId() + ",");
                 mNewsListAdapter.notifyDataSetChanged(); // getCount() -> getView()
             }
+
+            Intent intent = new Intent(mActivity, NewsDetailActivity.class);
+            intent.putExtra("url", newsItem.getUrl());
+            mActivity.startActivity(intent);
 
         }
     }
