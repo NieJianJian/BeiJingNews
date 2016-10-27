@@ -1,6 +1,8 @@
 package beijingnews.njj.com.beijingnews.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +22,7 @@ import beijingnews.njj.com.beijingnews.utils.ConstantUtils;
 /**
  * Created by Administrator on 2016/10/26.
  */
-public class NewsDetailActivity extends Activity {
+public class NewsDetailActivity extends Activity implements View.OnClickListener {
 
     @ViewInject(R.id.ib_back)
     private ImageButton ib_back;
@@ -37,6 +39,9 @@ public class NewsDetailActivity extends Activity {
     private ProgressBar mProgressBar;
 
     private String url;
+    private WebSettings mWebSettings;
+    private int temPosition = 2; // 缓存的位置
+    private int selectPosition = 2; // 选中的字号
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,26 +50,35 @@ public class NewsDetailActivity extends Activity {
 
         x.view().inject(this);
 
+        initView();
+        setWebView();
+    }
+
+    private void initView() {
         tv_title.setVisibility(View.GONE);
         ib_back.setVisibility(View.VISIBLE);
         ib_textsize.setVisibility(View.VISIBLE);
         ib_share.setVisibility(View.VISIBLE);
 
-        url = getIntent().getStringExtra("url")
-                .replaceAll("http://10.0.2.2:8080/zhbj", ConstantUtils.base_url);
-        Log.i("niejianjian", " -> mWebView -> " + url);
-        setWebView();
+        ib_back.setOnClickListener(this);
+        ib_textsize.setOnClickListener(this);
+        ib_share.setOnClickListener(this);
+
     }
 
     private void setWebView() {
-        WebSettings webSettings = mWebView.getSettings();
+        url = getIntent().getStringExtra("url")
+                .replaceAll("http://10.0.2.2:8080/zhbj", ConstantUtils.base_url);
+        Log.i("niejianjian", " -> mWebView -> " + url);
+
+        mWebSettings = mWebView.getSettings();
         // 设置支持JavaScript
         // 设置了，就可以分页加载，如果没设置，网页内容不管多少，会全部加载
-        webSettings.setJavaScriptEnabled(true);
+        mWebSettings.setJavaScriptEnabled(true);
         // 设置双击变大变小的支持
-        webSettings.setUseWideViewPort(true);
+        mWebSettings.setUseWideViewPort(true);
         // 设置支持按钮
-        webSettings.setBuiltInZoomControls(true);
+        mWebSettings.setBuiltInZoomControls(true);
 
         mWebView.loadUrl(url);
 
@@ -77,5 +91,62 @@ public class NewsDetailActivity extends Activity {
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.ib_back:
+                this.finish();
+                break;
+            case R.id.ib_share:
+
+                break;
+            case R.id.ib_textsize:
+                showChangeTextSizeDialog();
+                break;
+        }
+    }
+
+    private void showChangeTextSizeDialog() {
+        String[] items = {"超大字体", "大号字体", "正常字体", "小号字体", "超小字体"};
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("设置文字大小");
+        dialog.setSingleChoiceItems(items, temPosition, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                selectPosition = which;
+            }
+        });
+        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                temPosition = selectPosition;
+                changeTextSize(temPosition);
+            }
+        });
+        dialog.setNegativeButton("取消", null);
+
+        dialog.show();
+    }
+
+    private void changeTextSize(int temPosition) {
+        switch (temPosition) {
+            case 0:
+                mWebSettings.setTextSize(WebSettings.TextSize.LARGEST);
+                break;
+            case 1:
+                mWebSettings.setTextSize(WebSettings.TextSize.LARGER);
+                break;
+            case 2:
+                mWebSettings.setTextSize(WebSettings.TextSize.NORMAL);
+                break;
+            case 3:
+                mWebSettings.setTextSize(WebSettings.TextSize.SMALLER);
+                break;
+            case 4:
+                mWebSettings.setTextSize(WebSettings.TextSize.SMALLEST);
+                break;
+        }
     }
 }
