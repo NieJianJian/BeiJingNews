@@ -203,7 +203,7 @@ public class NewsCenterPager extends BasePager {
         // 设置标题
         tv_title.setText(leftMenuData.get(position).getTitle());
 
-        MenuDetailBasePager detailBasePager = mMenuDetailBasePagers.get(position);
+        final MenuDetailBasePager detailBasePager = mMenuDetailBasePagers.get(position);
         View rootView = detailBasePager.mRootView;
         fl_child_content.removeAllViews();
         fl_child_content.addView(rootView);
@@ -212,6 +212,14 @@ public class NewsCenterPager extends BasePager {
 
         if (position == 2) {
             mSwitchIb.setVisibility(View.VISIBLE);
+            mSwitchIb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PhotosMenuDetailPager photosMenuDetailPager =
+                            (PhotosMenuDetailPager) mMenuDetailBasePagers.get(2);
+                    photosMenuDetailPager.switchShowMode(mSwitchIb);
+                }
+            });
         } else {
             mSwitchIb.setVisibility(View.GONE);
         }

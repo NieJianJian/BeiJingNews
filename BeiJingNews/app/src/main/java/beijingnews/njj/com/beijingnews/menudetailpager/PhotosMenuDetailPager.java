@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +22,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
+import org.xutils.common.util.DensityUtil;
+import org.xutils.image.ImageOptions;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -44,9 +47,20 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
     GridView mGridView;
     private List<PhotosMenuDetailPagerBean.PhotosMenuDetailData.News> news;
     private PhotosAdapter mPhotosAdapter;
+    private ImageOptions mImageOptions;
+    private boolean isShowListView = true; // 默认显示ListView
 
     public PhotosMenuDetailPager(Activity activity) {
         super(activity);
+        mImageOptions = new ImageOptions.Builder()
+                .setSize(DensityUtil.dip2px(240), DensityUtil.dip2px(240))
+                .setRadius(DensityUtil.dip2px(5))
+                .setCrop(false) // 如果iamgeview的大小不是定义的wrap_content,不要crop
+//                .setPlaceholderScaleType(ImageView.ScaleType.MATRIX)// 加载中或错误图片的scaletype，
+                .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                .setLoadingDrawableId(R.drawable.pic_item_list_default)
+                .setFailureDrawableId(R.drawable.pic_item_list_default)
+                .build();
     }
 
     @Override
@@ -108,9 +122,30 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
         // 设置适配器
         mPhotosAdapter = new PhotosAdapter();
         mListView.setAdapter(mPhotosAdapter);
+        isShowListView = true;
         // 设置适配器item的布局
 
 
+    }
+
+    public void switchShowMode(ImageButton switchIb) {
+        if (isShowListView) {
+            // 显示GridView
+            isShowListView = false;
+            mGridView.setVisibility(View.VISIBLE);
+            mGridView.setAdapter(new PhotosAdapter());
+            mListView.setVisibility(View.GONE);
+
+            switchIb.setImageResource(R.drawable.icon_pic_list_type);
+        } else {
+            // 显示ListView
+            isShowListView = true;
+            mListView.setVisibility(View.VISIBLE);
+            mListView.setAdapter(new PhotosAdapter());
+            mGridView.setVisibility(View.GONE);
+
+            switchIb.setImageResource(R.drawable.icon_pic_grid_type);
+        }
     }
 
     class PhotosAdapter extends BaseAdapter {
@@ -143,7 +178,13 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
             }
 
             // 绑定数据
-            PhotosMenuDetailPagerBean.PhotosMenuDetailData.News newsItem = PhotosMenuDetailPager.this.news.get(position);
+            PhotosMenuDetailPagerBean.PhotosMenuDetailData.News newsItem =
+                    PhotosMenuDetailPager.this.news.get(position);
+            viewHolder.mPhotosTextView.setText(newsItem.getTitle());
+            // 请求图片用xUtils3
+            x.image().bind(viewHolder.mPhotosImageView,
+                    newsItem.getListimage().replaceAll("http://10.0.2.2:8080/zhbj", ConstantUtils.base_url),
+                    mImageOptions);
 
             return convertView;
         }
