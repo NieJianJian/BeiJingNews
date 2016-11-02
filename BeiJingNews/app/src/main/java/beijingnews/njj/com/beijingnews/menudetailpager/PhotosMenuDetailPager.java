@@ -1,6 +1,9 @@
 package beijingnews.njj.com.beijingnews.menudetailpager;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -33,8 +36,10 @@ import java.util.List;
 import beijingnews.njj.com.beijingnews.R;
 import beijingnews.njj.com.beijingnews.base.MenuDetailBasePager;
 import beijingnews.njj.com.beijingnews.domain.PhotosMenuDetailPagerBean;
+import beijingnews.njj.com.beijingnews.utils.BitmapUtils;
 import beijingnews.njj.com.beijingnews.utils.CacheUtils;
 import beijingnews.njj.com.beijingnews.utils.ConstantUtils;
+import beijingnews.njj.com.beijingnews.utils.NetCacheUtils;
 
 /**
  * Created by Administrator on 2016/10/17.
@@ -49,9 +54,11 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
     private PhotosAdapter mPhotosAdapter;
     private ImageOptions mImageOptions;
     private boolean isShowListView = true; // 默认显示ListView
+    private BitmapUtils mBitmapUtils;
 
     public PhotosMenuDetailPager(Activity activity) {
         super(activity);
+        mBitmapUtils = new BitmapUtils(mHandler);
         mImageOptions = new ImageOptions.Builder()
                 .setSize(DensityUtil.dip2px(240), DensityUtil.dip2px(240))
                 .setRadius(DensityUtil.dip2px(5))
@@ -182,13 +189,51 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
                     PhotosMenuDetailPager.this.news.get(position);
             viewHolder.mPhotosTextView.setText(newsItem.getTitle());
             // 请求图片用xUtils3
-            x.image().bind(viewHolder.mPhotosImageView,
-                    newsItem.getListimage().replaceAll("http://10.0.2.2:8080/zhbj", ConstantUtils.base_url),
-                    mImageOptions);
+//            x.image().bind(viewHolder.mPhotosImageView,
+//                    newsItem.getListimage().replaceAll("http://10.0.2.2:8080/zhbj", ConstantUtils.base_url),
+//                    mImageOptions);
+            viewHolder.mPhotosImageView.setTag(position);
+
+            Bitmap bitmap = mBitmapUtils.getBitmapFromNet(newsItem.getListimage().
+                    replaceAll("http://10.0.2.2:8080/zhbj", ConstantUtils.base_url), position);
+            if (bitmap != null) {
+                viewHolder.mPhotosImageView.setImageBitmap(bitmap);
+            }
+
 
             return convertView;
         }
     }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case NetCacheUtils.SUCCESS:
+                    Bitmap bitmap = (Bitmap) msg.obj;
+                    int position = msg.arg1;
+                    if (mListView != null && mListView.isShown()) {
+                        ImageView imageView = (ImageView) mListView.findViewWithTag(position);
+                        if (imageView != null && bitmap != null) {
+                            imageView.setImageBitmap(bitmap);
+                        }
+                    }
+
+                    if (mGridView != null && mGridView.isShown()) {
+                        ImageView imageView = (ImageView) mGridView.findViewWithTag(position);
+                        if (imageView != null && bitmap != null) {
+                            imageView.setImageBitmap(bitmap);
+                        }
+                    }
+
+                    break;
+                case NetCacheUtils.FAIL:
+
+                    break;
+            }
+        }
+    };
 
     static class ViewHolder {
         ImageView mPhotosImageView;
