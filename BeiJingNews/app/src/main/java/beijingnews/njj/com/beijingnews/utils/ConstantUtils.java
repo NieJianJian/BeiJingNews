@@ -5,9 +5,16 @@ package beijingnews.njj.com.beijingnews.utils;
  */
 public class ConstantUtils {
 
-    public static final String base_url = "http://192.168.16.108:8080/json/zhbj";
+    public static final String base_url = "http://192.168.2.240:8080/zhbj";
 
+    /**
+     * 新闻中心的url
+     */
     public static final String newscenter_url = base_url + "/categories.json";
 
+    /**
+     * 组图中心的url
+     */
+    public static final String photos_url = base_url + "/photos/photos_1.json";
 
 }
