@@ -3,6 +3,8 @@ package beijingnews.njj.com.beijingnews.menudetailpager.tabpager;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -72,6 +74,7 @@ public class TabDetailPager extends MenuDetailBasePager {
     private String moreUrl;
     private boolean isLoadMore = false;
     private NewsListAdapter mNewsListAdapter;
+    private InternalHandler internalHandler;
 
     public TabDetailPager(Activity activity, NewsCenterPagerBean.DataBean.ChildrenBean childrenBean) {
         super(activity);
@@ -233,6 +236,37 @@ public class TabDetailPager extends MenuDetailBasePager {
             news.addAll(moreNews);
             // 3.刷新数据
             mNewsListAdapter.notifyDataSetChanged();
+        }
+
+        // 每隔4s让图片滑动一次
+        if (internalHandler == null) {
+            internalHandler = new InternalHandler();
+        } else {
+            // 把消息移除把任务移除
+            internalHandler.removeCallbacksAndMessages(null);
+        }
+
+        internalHandler.postDelayed(new MyRunable(), 3000);
+
+    }
+
+    class InternalHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+//            int item = (mViewPager_TabDetail.getCurrentItem() == (mViewPager_TabDetail.getChildCount() - 1)) ? 0 : mViewPager_TabDetail.getCurrentItem() + 1;
+            int item = (mViewPager_TabDetail.getCurrentItem() + 1) % topnews.size();
+            mViewPager_TabDetail.setCurrentItem(item);
+
+            internalHandler.postDelayed(new MyRunable(), 3000);
+        }
+    }
+
+    class MyRunable implements Runnable {
+
+        @Override
+        public void run() {
+            internalHandler.sendEmptyMessage(0);
         }
     }
 
