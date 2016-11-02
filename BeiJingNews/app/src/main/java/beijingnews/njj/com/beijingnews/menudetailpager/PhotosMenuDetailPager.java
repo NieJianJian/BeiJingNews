@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -21,6 +25,7 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import beijingnews.njj.com.beijingnews.R;
 import beijingnews.njj.com.beijingnews.base.MenuDetailBasePager;
@@ -37,6 +42,8 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
     ListView mListView;
     @ViewInject(R.id.photos_gridview)
     GridView mGridView;
+    private List<PhotosMenuDetailPagerBean.PhotosMenuDetailData.News> news;
+    private PhotosAdapter mPhotosAdapter;
 
     public PhotosMenuDetailPager(Activity activity) {
         super(activity);
@@ -96,6 +103,54 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
         Gson gson = new Gson();
         PhotosMenuDetailPagerBean photosBean = gson.fromJson(json, PhotosMenuDetailPagerBean.class);
         Log.i("niejianjian", "PhotosMenuDetailPager ->  ->" + photosBean.getData().getNews().get(0).getTitle());
+        // 得到数据
+        news = photosBean.getData().getNews();
+        // 设置适配器
+        mPhotosAdapter = new PhotosAdapter();
+        mListView.setAdapter(mPhotosAdapter);
+        // 设置适配器item的布局
 
+
+    }
+
+    class PhotosAdapter extends BaseAdapter {
+        @Override
+        public int getCount() {
+            return news.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder viewHolder;
+            if (convertView == null) {
+                convertView = View.inflate(mActivity, R.layout.photos_item, null);
+                viewHolder = new ViewHolder();
+                viewHolder.mPhotosImageView = (ImageView) convertView.findViewById(R.id.photos_imageview);
+                viewHolder.mPhotosTextView = (TextView) convertView.findViewById(R.id.photos_textview);
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
+
+            // 绑定数据
+            PhotosMenuDetailPagerBean.PhotosMenuDetailData.News newsItem = PhotosMenuDetailPager.this.news.get(position);
+
+            return convertView;
+        }
+    }
+
+    static class ViewHolder {
+        ImageView mPhotosImageView;
+        TextView mPhotosTextView;
     }
 }
