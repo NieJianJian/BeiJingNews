@@ -119,7 +119,7 @@ public class NewsCenterPager extends BasePager {
         // 添加新闻详情页面，专题详情页面，组图详情页面，互动详情页面
         // 先加载数据，添加集合，防止初始化时，数据还未加载完成导致空指针
         mMenuDetailBasePagers = new ArrayList<MenuDetailBasePager>();
-        mMenuDetailBasePagers.add(new NewsMenuDetailPager(mActivity,bean.getData().get(0)));
+        mMenuDetailBasePagers.add(new NewsMenuDetailPager(mActivity, bean.getData().get(0)));
         mMenuDetailBasePagers.add(new TopicMenuDetailPager(mActivity));
         mMenuDetailBasePagers.add(new PhotosMenuDetailPager(mActivity));
         mMenuDetailBasePagers.add(new InteracMenuDetailPager(mActivity));
@@ -209,5 +209,11 @@ public class NewsCenterPager extends BasePager {
         fl_child_content.addView(rootView);
         // 还没有掉detailBasePager.initData()方法
         detailBasePager.initData();
+
+        if (position == 2) {
+            mSwitchIb.setVisibility(View.VISIBLE);
+        } else {
+            mSwitchIb.setVisibility(View.GONE);
+        }
     }
 }
