@@ -9,6 +9,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -257,7 +258,6 @@ public class TabDetailPager extends MenuDetailBasePager {
 //            int item = (mViewPager_TabDetail.getCurrentItem() == (mViewPager_TabDetail.getChildCount() - 1)) ? 0 : mViewPager_TabDetail.getCurrentItem() + 1;
             int item = (mViewPager_TabDetail.getCurrentItem() + 1) % topnews.size();
             mViewPager_TabDetail.setCurrentItem(item);
-
             internalHandler.postDelayed(new MyRunable(), 3000);
         }
     }
@@ -430,6 +430,9 @@ public class TabDetailPager extends MenuDetailBasePager {
             // 联网请求图片
             x.image().bind(imageView, imageUrl, imageOptions);
 
+            // 设置图片的触摸事件监听，点击时，取消图片自动轮播效果
+            imageView.setOnTouchListener(new MyOnTouchListener());
+
             return imageView;
         }
 
@@ -447,6 +450,33 @@ public class TabDetailPager extends MenuDetailBasePager {
         @Override
         public boolean isViewFromObject(View view, Object object) {
             return view == object;
+        }
+    }
+
+    class MyOnTouchListener implements View.OnTouchListener {
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    if (internalHandler != null) {
+                        internalHandler.removeCallbacksAndMessages(null);
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if (internalHandler != null) {
+                        internalHandler.postDelayed(new MyRunable(), 3000);
+                    }
+                    break;
+                case MotionEvent.ACTION_CANCEL:
+                    if (internalHandler != null) {
+                        internalHandler.postDelayed(new MyRunable(), 3000);
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return true; // 要返回true，否则不执行up和cancel方法，因为false代表不处理
         }
     }
 }
