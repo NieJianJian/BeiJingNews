@@ -21,11 +21,13 @@ public class NetCacheUtils {
     public static final int FAIL = 2;
     private final Handler mHandler;
     private LocalCacheUtils mLocalCacheUtils;
+    private MemoryCacheUtils mMemoryCacheUtils;
     private ExecutorService service;
 
-    public NetCacheUtils(Handler handler, LocalCacheUtils localCacheUtils) {
+    public NetCacheUtils(Handler handler, LocalCacheUtils localCacheUtils, MemoryCacheUtils memoryCacheUtils) {
         this.mHandler = handler;
         this.mLocalCacheUtils = localCacheUtils;
+        this.mMemoryCacheUtils = memoryCacheUtils;
         service = Executors.newFixedThreadPool(10);
     }
 
@@ -66,6 +68,8 @@ public class NetCacheUtils {
                     mHandler.sendMessage(msg);
 
                     // 保存一份在内存汇总
+                    mMemoryCacheUtils.putBitmap(url, bitmap);
+
                     // 保存一份到本地中
                     mLocalCacheUtils.putBitmap(url, bitmap);
 

@@ -10,10 +10,12 @@ public class BitmapUtils {
 
     private NetCacheUtils mNetCacheUtils;
     private LocalCacheUtils mLocalCacheUtils;
+    private MemoryCacheUtils mMemoryCacheUtils;
 
     public BitmapUtils(Handler handler) {
         mLocalCacheUtils = new LocalCacheUtils();
-        mNetCacheUtils = new NetCacheUtils(handler, mLocalCacheUtils);
+        mMemoryCacheUtils = new MemoryCacheUtils();
+        mNetCacheUtils = new NetCacheUtils(handler, mLocalCacheUtils,mMemoryCacheUtils);
     }
 
     /**
@@ -26,6 +28,12 @@ public class BitmapUtils {
      */
     public Bitmap getBitmapFromNet(String listImage, int position) {
         // 1.从内存取
+        if (mMemoryCacheUtils != null) {
+            Bitmap bitmap = mMemoryCacheUtils.getBitmap(listImage);
+            if (bitmap != null) {
+                return bitmap;
+            }
+        }
         // 2.从本地取
         if (mLocalCacheUtils != null) {
             Bitmap bitmap = mLocalCacheUtils.getBitmap(listImage);
