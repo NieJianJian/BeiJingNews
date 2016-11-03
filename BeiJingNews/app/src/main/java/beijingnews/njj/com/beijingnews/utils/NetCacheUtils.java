@@ -18,9 +18,11 @@ public class NetCacheUtils {
     public static final int SUCCESS = 1;
     public static final int FAIL = 2;
     private final Handler mHandler;
+    private LocalCacheUtils mLocalCacheUtils;
 
-    public NetCacheUtils(Handler handler) {
+    public NetCacheUtils(Handler handler, LocalCacheUtils localCacheUtils) {
         this.mHandler = handler;
+        this.mLocalCacheUtils = localCacheUtils;
     }
 
     public void getBitmap(String listImage, int position) {
@@ -59,6 +61,8 @@ public class NetCacheUtils {
 
                     // 保存一份在内存汇总
                     // 保存一份到本地中
+                    mLocalCacheUtils.putBitmap(url,bitmap);
+
                 }
 
             } catch (IOException e) {
