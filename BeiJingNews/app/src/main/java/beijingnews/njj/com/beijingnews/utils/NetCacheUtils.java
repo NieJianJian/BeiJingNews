@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by Administrator on 2016/11/2.
@@ -19,14 +21,18 @@ public class NetCacheUtils {
     public static final int FAIL = 2;
     private final Handler mHandler;
     private LocalCacheUtils mLocalCacheUtils;
+    private ExecutorService service;
 
     public NetCacheUtils(Handler handler, LocalCacheUtils localCacheUtils) {
         this.mHandler = handler;
         this.mLocalCacheUtils = localCacheUtils;
+        service = Executors.newFixedThreadPool(10);
     }
 
     public void getBitmap(String listImage, int position) {
-        new Thread(new MyRunnable(listImage, position)).start();
+//        new Thread(new MyRunnable(listImage, position)).start();
+        service.execute(new MyRunnable(listImage, position));
+
     }
 
     class MyRunnable implements Runnable {
@@ -61,7 +67,7 @@ public class NetCacheUtils {
 
                     // 保存一份在内存汇总
                     // 保存一份到本地中
-                    mLocalCacheUtils.putBitmap(url,bitmap);
+                    mLocalCacheUtils.putBitmap(url, bitmap);
 
                 }
 
