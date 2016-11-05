@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\AndroidStudioProjects\\BeijingNewsTest\\testVolley\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "C:\\AndroidStudioProjects\\BeijingNewsTest\\testVolley\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\BeijingNewsTest\\testVolley\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\empty_photo.png",
+        "source": "C:\\AndroidStudioProjects\\BeijingNewsTest\\testVolley\\src\\main\\res\\drawable-hdpi\\empty_photo.png"
+    }
+]

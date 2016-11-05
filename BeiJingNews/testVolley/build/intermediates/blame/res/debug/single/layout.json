@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "C:\\AndroidStudioProjects\\BeijingNewsTest\\testVolley\\build\\intermediates\\res\\merged\\debug\\layout\\actvity_imager_list.xml",
+        "source": "C:\\AndroidStudioProjects\\BeijingNewsTest\\testVolley\\src\\main\\res\\layout\\actvity_imager_list.xml"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\BeijingNewsTest\\testVolley\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
+        "source": "C:\\AndroidStudioProjects\\BeijingNewsTest\\testVolley\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\BeijingNewsTest\\testVolley\\build\\intermediates\\res\\merged\\debug\\layout\\activity_imageviewdata.xml",
+        "source": "C:\\AndroidStudioProjects\\BeijingNewsTest\\testVolley\\src\\main\\res\\layout\\activity_imageviewdata.xml"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\BeijingNewsTest\\testVolley\\build\\intermediates\\res\\merged\\debug\\layout\\activity_textdata.xml",
+        "source": "C:\\AndroidStudioProjects\\BeijingNewsTest\\testVolley\\src\\main\\res\\layout\\activity_textdata.xml"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\BeijingNewsTest\\testVolley\\build\\intermediates\\res\\merged\\debug\\layout\\image_items.xml",
+        "source": "C:\\AndroidStudioProjects\\BeijingNewsTest\\testVolley\\src\\main\\res\\layout\\image_items.xml"
+    }
+]
