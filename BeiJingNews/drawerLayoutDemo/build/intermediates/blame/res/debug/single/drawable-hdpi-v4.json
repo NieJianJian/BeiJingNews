@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\action_search.png",
+        "source": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\src\\main\\res\\drawable-hdpi\\action_search.png"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\drawer_shadow.9.png",
+        "source": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\src\\main\\res\\drawable-hdpi\\drawer_shadow.9.png"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_drawer.png",
+        "source": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\src\\main\\res\\drawable-hdpi\\ic_drawer.png"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_drawer.png",
+        "source": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\src\\main\\res\\drawable-hdpi\\ic_drawer.png"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\action_search.png",
+        "source": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\src\\main\\res\\drawable-hdpi\\action_search.png"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\drawer_shadow.9.png",
+        "source": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\src\\main\\res\\drawable-hdpi\\drawer_shadow.9.png"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_drawer.png",
+        "source": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\src\\main\\res\\drawable-hdpi\\ic_drawer.png"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\action_search.png",
+        "source": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\src\\main\\res\\drawable-hdpi\\action_search.png"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\drawer_shadow.9.png",
+        "source": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\src\\main\\res\\drawable-hdpi\\drawer_shadow.9.png"
+    }
+]

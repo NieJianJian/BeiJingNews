@@ -1,0 +1,539 @@
+[
+    {
+        "outputFile": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 11,
+                    "endColumn": 19,
+                    "endOffset": 333
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 110,
+                        "endLine": 14,
+                        "endColumn": 19,
+                        "endOffset": 388
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 338,
+                    "endColumn": 57,
+                    "endOffset": 391
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\src\\main\\res\\values\\dimens.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 92,
+                        "endColumn": 57,
+                        "endOffset": 145
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 396,
+                    "endColumn": 55,
+                    "endOffset": 447
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\src\\main\\res\\values\\dimens.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 151,
+                        "endColumn": 55,
+                        "endOffset": 202
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 452,
+                    "endColumn": 55,
+                    "endOffset": 503
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 522,
+                        "endColumn": 55,
+                        "endOffset": 573
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 508,
+                    "endColumn": 52,
+                    "endOffset": 556
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 56,
+                        "endColumn": 52,
+                        "endOffset": 104
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 561,
+                    "endColumn": 86,
+                    "endOffset": 643
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 578,
+                        "endColumn": 86,
+                        "endOffset": 660
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 648,
+                    "endColumn": 64,
+                    "endOffset": 708
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 457,
+                        "endColumn": 64,
+                        "endOffset": 517
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 713,
+                    "endColumn": 62,
+                    "endOffset": 771
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 394,
+                        "endColumn": 62,
+                        "endOffset": 452
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 776,
+                    "endLine": 25,
+                    "endColumn": 12,
+                    "endOffset": 1062
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 191,
+                        "endLine": 12,
+                        "endColumn": 12,
+                        "endOffset": 481
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 1067,
+                    "endLine": 28,
+                    "endColumn": 12,
+                    "endOffset": 1222
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 522,
+                        "endLine": 17,
+                        "endColumn": 12,
+                        "endOffset": 679
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 11,
+                    "endColumn": 19,
+                    "endOffset": 333
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 120,
+                        "endLine": 14,
+                        "endColumn": 19,
+                        "endOffset": 398
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 338,
+                    "endColumn": 57,
+                    "endOffset": 391
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\src\\main\\res\\values\\dimens.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 92,
+                        "endColumn": 57,
+                        "endOffset": 145
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 396,
+                    "endColumn": 55,
+                    "endOffset": 447
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\src\\main\\res\\values\\dimens.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 151,
+                        "endColumn": 55,
+                        "endOffset": 202
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 452,
+                    "endColumn": 55,
+                    "endOffset": 503
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 532,
+                        "endColumn": 55,
+                        "endOffset": 583
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 508,
+                    "endColumn": 62,
+                    "endOffset": 566
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 56,
+                        "endColumn": 62,
+                        "endOffset": 114
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 571,
+                    "endColumn": 86,
+                    "endOffset": 653
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 588,
+                        "endColumn": 86,
+                        "endOffset": 670
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 658,
+                    "endColumn": 64,
+                    "endOffset": 718
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 467,
+                        "endColumn": 64,
+                        "endOffset": 527
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 723,
+                    "endColumn": 62,
+                    "endOffset": 781
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 404,
+                        "endColumn": 62,
+                        "endOffset": 462
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 786,
+                    "endLine": 25,
+                    "endColumn": 12,
+                    "endOffset": 1072
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 191,
+                        "endLine": 12,
+                        "endColumn": 12,
+                        "endOffset": 481
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 1077,
+                    "endLine": 28,
+                    "endColumn": 12,
+                    "endOffset": 1232
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\src\\main\\res\\values\\styles.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 522,
+                        "endLine": 17,
+                        "endColumn": 12,
+                        "endOffset": 679
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 11,
+                    "endColumn": 19,
+                    "endOffset": 333
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 338,
+                    "endColumn": 57,
+                    "endOffset": 391
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\src\\main\\res\\values\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 396,
+                    "endColumn": 55,
+                    "endOffset": 447
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\src\\main\\res\\values\\dimens.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 452,
+                    "endColumn": 55,
+                    "endOffset": 503
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 508,
+                    "endColumn": 52,
+                    "endOffset": 556
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 56,
+                        "endColumn": 52,
+                        "endOffset": 104
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 561,
+                    "endColumn": 86,
+                    "endOffset": 643
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 648,
+                    "endColumn": 64,
+                    "endOffset": 708
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 713,
+                    "endColumn": 62,
+                    "endOffset": 771
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\src\\main\\res\\values\\strings.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 776,
+                    "endLine": 25,
+                    "endColumn": 12,
+                    "endOffset": 1062
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\src\\main\\res\\values\\styles.xml"
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 1067,
+                    "endLine": 28,
+                    "endColumn": 12,
+                    "endOffset": 1222
+                },
+                "from": {
+                    "file": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\src\\main\\res\\values\\styles.xml"
+                }
+            }
+        ]
+    }
+]

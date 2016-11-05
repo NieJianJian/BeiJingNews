@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
+        "source": "C:\\AndroidStudioProjects\\ScreenAdapter\\drawerLayoutDemo\\src\\main\\res\\menu\\main.xml"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
+        "source": "C:\\AndroidStudioProjects\\BejingNews\\drawerLayoutDemo\\src\\main\\res\\menu\\main.xml"
+    },
+    {
+        "merged": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\build\\intermediates\\res\\merged\\debug\\menu\\main.xml",
+        "source": "C:\\AndroidStudioProjects\\BeijingNewsTest\\drawerLayoutDemo\\src\\main\\res\\menu\\main.xml"
+    }
+]
