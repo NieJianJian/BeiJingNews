@@ -36,7 +36,7 @@ import java.util.List;
 import beijingnews.njj.com.beijingnews.R;
 import beijingnews.njj.com.beijingnews.base.MenuDetailBasePager;
 import beijingnews.njj.com.beijingnews.domain.PhotosMenuDetailPagerBean;
-import beijingnews.njj.com.beijingnews.utils.BitmapUtils;
+import beijingnews.njj.com.beijingnews.utils.BitMapUtils;
 import beijingnews.njj.com.beijingnews.utils.CacheUtils;
 import beijingnews.njj.com.beijingnews.utils.ConstantUtils;
 import beijingnews.njj.com.beijingnews.utils.NetCacheUtils;
@@ -54,11 +54,11 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
     private PhotosAdapter mPhotosAdapter;
     private ImageOptions mImageOptions;
     private boolean isShowListView = true; // 默认显示ListView
-    private BitmapUtils mBitmapUtils;
+    private BitMapUtils mBitmapUtils;
 
     public PhotosMenuDetailPager(Activity activity) {
         super(activity);
-        mBitmapUtils = new BitmapUtils(mHandler);
+        mBitmapUtils = new BitMapUtils(mHandler);
         mImageOptions = new ImageOptions.Builder()
                 .setSize(DensityUtil.dip2px(240), DensityUtil.dip2px(240))
                 .setRadius(DensityUtil.dip2px(5))

@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "beijingnews.njj.com.beijingnews"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -28,4 +28,5 @@ dependencies {
     compile project(':xutils_library')
     compile files('libs/gson-2.2.1.jar')
     compile project(':ViewPagerIndicator_library')
+    compile files('libs/volley.jar')
 }

@@ -6,13 +6,13 @@ import android.os.Handler;
 /**
  * Created by Administrator on 2016/11/2.
  */
-public class BitmapUtils {
+public class BitMapUtils {
 
     private NetCacheUtils mNetCacheUtils;
     private LocalCacheUtils mLocalCacheUtils;
     private MemoryCacheUtils mMemoryCacheUtils;
 
-    public BitmapUtils(Handler handler) {
+    public BitMapUtils(Handler handler) {
         mLocalCacheUtils = new LocalCacheUtils();
         mMemoryCacheUtils = new MemoryCacheUtils();
         mNetCacheUtils = new NetCacheUtils(handler, mLocalCacheUtils,mMemoryCacheUtils);

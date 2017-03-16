@@ -5,7 +5,7 @@ package beijingnews.njj.com.beijingnews.utils;
  */
 public class ConstantUtils {
 
-    public static final String base_url = "http://192.168.2.240:8080/zhbj";
+    public static final String base_url = "http://10.0.0.30:8080/zhbj";
 
     /**
      * 新闻中心的url
