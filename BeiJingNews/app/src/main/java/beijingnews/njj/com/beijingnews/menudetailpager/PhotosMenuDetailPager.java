@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -50,8 +54,11 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
     ListView mListView;
     @ViewInject(R.id.photos_gridview)
     GridView mGridView;
+    @ViewInject(R.id.photos_recyclerview)
+    RecyclerView mRecyclerView;
     private List<PhotosMenuDetailPagerBean.PhotosMenuDetailData.News> news;
     private PhotosAdapter mPhotosAdapter;
+    private PhotosRecyclerAdapter mRecyclerAdapter;
     private ImageOptions mImageOptions;
     private boolean isShowListView = true; // 默认显示ListView
     private BitMapUtils mBitmapUtils;
@@ -132,6 +139,10 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
         isShowListView = true;
         // 设置适配器item的布局
 
+        // 初始化recyclerview的相关设置
+        mRecyclerAdapter = new PhotosRecyclerAdapter(news);
+        StaggeredGridLayoutManager linearLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
 
     }
 
@@ -139,8 +150,10 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
         if (isShowListView) {
             // 显示GridView
             isShowListView = false;
-            mGridView.setVisibility(View.VISIBLE);
-            mGridView.setAdapter(new PhotosAdapter());
+//            mGridView.setVisibility(View.VISIBLE);
+//            mGridView.setAdapter(new PhotosAdapter());
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mRecyclerView.setAdapter(mRecyclerAdapter);
             mListView.setVisibility(View.GONE);
 
             switchIb.setImageResource(R.drawable.icon_pic_list_type);
@@ -149,9 +162,68 @@ public class PhotosMenuDetailPager extends MenuDetailBasePager {
             isShowListView = true;
             mListView.setVisibility(View.VISIBLE);
             mListView.setAdapter(new PhotosAdapter());
-            mGridView.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.GONE);
 
             switchIb.setImageResource(R.drawable.icon_pic_grid_type);
+        }
+    }
+
+    class PhotosRecyclerAdapter extends RecyclerView.Adapter<PhotosRecyclerAdapter.ViewHolder> {
+        private List<PhotosMenuDetailPagerBean.PhotosMenuDetailData.News> mNews;
+
+        PhotosRecyclerAdapter(List<PhotosMenuDetailPagerBean.PhotosMenuDetailData.News> news) {
+            this.mNews = news;
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder {
+            View mPhotoView;
+            ImageView mPhotosImageView;
+            TextView mPhotosTextView;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+                mPhotoView = itemView;
+                mPhotosImageView = (ImageView) itemView.findViewById(R.id.photos_imageview);
+                mPhotosTextView = (TextView) itemView.findViewById(R.id.photos_textview);
+            }
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.photos_item, parent, false);
+            final ViewHolder holder = new ViewHolder(view);
+            holder.mPhotoView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = holder.getAdapterPosition(); // 获取用户点击
+                    Toast.makeText(mActivity, mNews.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            holder.mPhotosImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = holder.getAdapterPosition(); // 获取用户点击
+                    Toast.makeText(mActivity, mNews.get(position).getUrl(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            PhotosMenuDetailPagerBean.PhotosMenuDetailData.News newItem = mNews.get(position);
+            holder.mPhotosTextView.setText(newItem.getTitle());
+
+            Bitmap bitmap = mBitmapUtils.getBitmapFromNet(newItem.getListimage().
+                    replaceAll("http://10.0.2.2:8080/zhbj", ConstantUtils.base_url), position);
+            if (bitmap != null) {
+                holder.mPhotosImageView.setImageBitmap(bitmap);
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return mNews.size();
         }
     }
 

@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:maxLines="2"
             android:padding="10dp"
             android:text="的卡打开浪费家里三口拉法艰苦"
             android:textColor="#000000"
