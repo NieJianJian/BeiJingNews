@@ -44,7 +44,7 @@ public class MainActivity extends SlidingFragmentActivity {
         // 得到SlidingMenu
         SlidingMenu slidingMenu = getSlidingMenu();
         // 设置右侧菜单
-//        slidingMenu.setSecondaryMenu(R.layout.right_menu);
+//        slidingMenu.setSecondaryMenu(R.layout.right_menu); // setMode(SlidingMenu.LEFT_RIGHT)
         // 设置模式
         slidingMenu.setMode(SlidingMenu.LEFT);
         // 设置滑动模式
